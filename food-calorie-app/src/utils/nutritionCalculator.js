@@ -125,7 +125,24 @@ export function parseGrams(portionStr) {
   // 匹配克/g/毫升/ml
   const gramMatch = String(portionStr).match(/(\d+(?:\.\d+)?)\s*(?:克|g|毫升|ml)/i);
   if (gramMatch) return Math.round(parseFloat(gramMatch[1]));
-  
+
+  // Convert common count/serving units when the model omits an explicit weight.
+  const unitGrams = {
+    '大碗': 260, '平碗': 150, '碗': 180, '小半碗': 80,
+    '大份': 250, '小份': 100, '份': 150, '根': 60,
+    '个': 50, '杯': 250, '盒': 250, '勺': 10, '片': 35,
+    '块': 80, '把': 50, '两': 50, '斤': 500
+  };
+  const unitPattern = /(\d+(?:\.\d+)?)\s*(大碗|平碗|小半碗|碗|大份|小份|份|根|个|杯|盒|勺|片|块|把|两|斤)/;
+  const unitMatch = String(portionStr).match(unitPattern);
+  if (unitMatch) return Math.max(1, Math.round(Number(unitMatch[1]) * unitGrams[unitMatch[2]]));
+
+  const chineseCount = String(portionStr).match(/(半|一|二|两|三|四|五|六|七|八|九|十)\s*(大碗|平碗|小半碗|碗|大份|小份|份|根|个|杯|盒|勺|片|块|把)/);
+  if (chineseCount) {
+    const count = { 半: 0.5, 一: 1, 二: 2, 两: 2, 三: 3, 四: 4, 五: 5, 六: 6, 七: 7, 八: 8, 九: 9, 十: 10 }[chineseCount[1]];
+    return Math.max(1, Math.round(count * unitGrams[chineseCount[2]]));
+  }
+
   // 纯数字匹配
   const numMatch = String(portionStr).match(/(\d+(?:\.\d+)?)/);
   if (numMatch) return Math.round(parseFloat(numMatch[1]));

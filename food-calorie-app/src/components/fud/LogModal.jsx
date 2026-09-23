@@ -18,15 +18,18 @@ import NutritionReview from './NutritionReview';
 import { compressImage, analyzeFoodWithDeepSeek, analyzeFoodTextWithDeepSeek } from '../../services/deepseek';
 import { TAKEAWAY_PRESETS, COOKING_OIL_LEVELS } from '../../utils/foodDatabase';
 
-export default function LogModal({
+export default function LogModal(props) {
+  if (!props.isOpen) return null;
+  return <OpenLogModal {...props} />;
+}
+
+function OpenLogModal({
   isOpen,
   initialMealType = 'lunch',
   settings,
   onSaveMeal,
   onClose
 }) {
-  if (!isOpen) return null;
-
   // 严格执行技术决策：默认将【文字/口述】设为主输入模式，外卖点选为高频专用流，照片作为辅助记录
   const [mode, setMode] = useState('text'); // 'text' | 'takeaway' | 'camera'
   const [mealType, setMealType] = useState(initialMealType);
@@ -99,7 +102,7 @@ export default function LogModal({
         baseGrams: sizeConfig.grams,
         calories: finalCals,
         protein: Math.round(finalCals * 0.22 / 4),
-        fat: Math.round((finalCals * 0.35 / 9) + (oilConfig.oilGrams * 0.4)),
+        fat: Math.round(finalCals * 0.35 / 9),
         carbs: Math.round(finalCals * 0.43 / 4)
       }
     ];

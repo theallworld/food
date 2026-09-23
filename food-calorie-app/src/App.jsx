@@ -58,39 +58,21 @@ export default function App() {
 
   // 所选日期的饮食记录
   const [meals, setMeals] = useState([]);
+  const [todayMeals, setTodayMeals] = useState([]);
 
   // 加载所选日期的记录
   const loadMeals = async (dateStr) => {
     const list = await getMealsByDate(dateStr);
-    // 如果是今天且为空，尝试从旧版 demo 结构迁移一个样例，确保新用户上手有视觉参考
-    if (list.length === 0 && dateStr === getTodayDateString()) {
-      const sample = [
-        {
-          id: 'sample-1',
-          mealType: 'breakfast',
-          dishName: '燕麦酸奶水果碗',
-          totalCalories: 320,
-          totalProtein: 14.5,
-          totalCarbs: 48.0,
-          totalFat: 6.2,
-          time: '08:30',
-          foods: [
-            { name: '燕麦片', portion: '50g', calories: 190 },
-            { name: '希腊酸奶', portion: '100g', calories: 90 },
-            { name: '蓝莓', portion: '50g', calories: 40 }
-          ]
-        }
-      ];
-      await saveMealRecord(sample[0], dateStr);
-      setMeals(sample);
-      return;
-    }
     setMeals(list);
   };
 
   useEffect(() => {
     loadMeals(selectedDate);
   }, [selectedDate]);
+
+  useEffect(() => {
+    getMealsByDate(getTodayDateString()).then(setTodayMeals);
+  }, []);
 
   const handleSaveSettings = (newSettings) => {
     setSettings(newSettings);
@@ -125,12 +107,14 @@ export default function App() {
     const targetDate = selectedDate || getTodayDateString();
     await saveMealRecord(record, targetDate);
     await loadMeals(targetDate);
+    if (targetDate === getTodayDateString()) setTodayMeals(await getMealsByDate(targetDate));
   };
 
   const handleDeleteMeal = async (id, dateStr) => {
     const targetDate = dateStr || selectedDate;
     await deleteMealRecord(id, targetDate);
     await loadMeals(targetDate);
+    if (targetDate === getTodayDateString()) setTodayMeals(await getMealsByDate(targetDate));
   };
 
   const handleClearHistory = async (dateStr) => {
@@ -138,6 +122,7 @@ export default function App() {
     if (window.confirm(`确定要清空 ${targetDate} 的所有饮食打卡记录吗？`)) {
       await clearMealsByDate(targetDate);
       await loadMeals(targetDate);
+      if (targetDate === getTodayDateString()) setTodayMeals(await getMealsByDate(targetDate));
     }
   };
 
@@ -151,12 +136,12 @@ export default function App() {
       <main style={{ flex: 1 }}>
         {activeTab === 'dashboard' && (
           <DashboardTab
-            todayMeals={meals}
+            todayMeals={todayMeals}
             targetCalories={settings.targetCalories}
             targetMacros={targetMacros}
             userProfile={userProfile}
             onOpenLogWithMeal={handleOpenLogWithMeal}
-            onDeleteMeal={(id) => handleDeleteMeal(id, selectedDate)}
+            onDeleteMeal={(id) => handleDeleteMeal(id, getTodayDateString())}
           />
         )}
 
@@ -174,7 +159,7 @@ export default function App() {
 
         {activeTab === 'coach' && (
           <CoachTab
-            todayMeals={meals}
+            todayMeals={todayMeals}
             targetCalories={settings.targetCalories}
             targetMacros={targetMacros}
             settings={settings}
