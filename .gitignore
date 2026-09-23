@@ -1,0 +1,50 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Node dependencies and build
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Android / Gradle build caches & outputs
+.gradle/
+**/android/.gradle/
+**/android/build/
+**/android/app/build/
+**/android/capacitor-cordova-android-plugins/build/
+**/android/local.properties
+.idea/
+*.iml
+
+# Environment variables & secrets
+.env
+.env.*
+*.env
+*.key
+*.pem
+
+# Historical APKs (keep latest v1.6 release)
+food-calorie-tracker-v1.1.apk
+food-calorie-tracker-v1.2.apk
+food-calorie-tracker-v1.3.apk
+food-calorie-tracker-v1.4.apk
+food-calorie-tracker-v1.5.apk
+食物热量助手_v1.1.apk
+食物热量助手_v1.2.apk
+食物热量助手_v1.3.apk
+食物热量助手_v1.4.apk
+食物热量助手_v1.5.apk
