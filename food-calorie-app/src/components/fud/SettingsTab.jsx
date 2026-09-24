@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Capacitor, registerPlugin } from '@capacitor/core';
 import {
   Key,
   Target,
@@ -10,7 +11,8 @@ import {
   Scale,
   ChevronDown,
   Check,
-  X
+  X,
+  Smartphone
 } from 'lucide-react';
 import {
   calculateBMI,
@@ -18,6 +20,8 @@ import {
   ACTIVITY_LEVELS,
   GOALS
 } from '../../utils/nutritionCalculator';
+
+const FoodWidget = registerPlugin('FoodWidget');
 
 export default function SettingsTab({
   settings,
@@ -48,6 +52,7 @@ export default function SettingsTab({
   const [fat, setFat] = useState(targetMacros.fat || 65);
 
   const [savedSuccess, setSavedSuccess] = useState(false);
+  const [widgetMessage, setWidgetMessage] = useState('');
   const [appliedCalcSuccess, setAppliedCalcSuccess] = useState(false);
   const [activityPickerOpen, setActivityPickerOpen] = useState(false);
 
@@ -104,13 +109,27 @@ export default function SettingsTab({
             BODY & TARGETS · 身体档案与热量预算
           </span>
           <span style={{ fontSize: '11px', fontWeight: '700', color: '#047857', background: '#ecfdf5', padding: '2px 8px', borderRadius: '10px' }}>
-            v1.8.2
+            v1.8.3
           </span>
         </div>
         <h1 style={{ fontSize: '20px', fontWeight: '800', color: '#0f172a', marginTop: '2px' }}>
           身体数据与营养目标
         </h1>
       </div>
+
+      {Capacitor.isNativePlatform() && Capacitor.getPlatform() === 'android' && (
+        <section style={{ background: '#ffffff', borderRadius: '18px', padding: '16px', border: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{ width: '42px', height: '42px', borderRadius: '13px', background: '#ecfdf5', color: '#059669', display: 'grid', placeItems: 'center', flexShrink: 0 }}><Smartphone size={21} /></div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontSize: '14px', color: '#0f172a', fontWeight: 700 }}>桌面今日营养小组件</div>
+            <div style={{ fontSize: '12px', color: '#64748b', marginTop: '3px' }}>{widgetMessage || '把今日热量和营养素放到手机桌面'}</div>
+          </div>
+          <button type="button" onClick={async () => {
+            try { await FoodWidget.pinWidget(); setWidgetMessage('已发送添加请求，请在桌面确认放置'); }
+            catch { setWidgetMessage('长按桌面空白处，在“小组件”列表中添加「今日营养」'); }
+          }} style={{ border: 0, borderRadius: '11px', background: '#0f172a', color: '#fff', fontWeight: 700, fontSize: '12px', padding: '10px 12px', whiteSpace: 'nowrap' }}>添加</button>
+        </section>
+      )}
 
       {/* 1. 身体档案与科学测算卡片 */}
       <div style={{ background: '#ffffff', borderRadius: '22px', padding: '18px', border: '1px solid #e2e8f0', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
@@ -402,9 +421,6 @@ export default function SettingsTab({
                 placeholder="sk-..."
                 style={{ width: '100%', padding: '10px 12px', borderRadius: '12px', border: '1px solid #cbd5e1', fontSize: '13px', outline: 'none' }}
               />
-              <div style={{ fontSize: '11px', color: '#10b981', marginTop: '4px' }}>
-                ✓ 已预置测试 Key，可直接使用
-              </div>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '8px' }}>

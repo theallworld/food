@@ -4,4 +4,6 @@
     <string name="title_activity_main">饭时记</string>
     <string name="package_name">com.calorie.foodtracker</string>
     <string name="custom_url_scheme">com.calorie.foodtracker</string>
+    <string name="widget_name">今日营养</string>
+    <string name="widget_description">查看今天摄入的热量和营养素</string>
 </resources>

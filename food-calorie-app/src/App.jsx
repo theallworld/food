@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Capacitor, registerPlugin } from '@capacitor/core';
 import BottomNav from './components/fud/BottomNav';
 import DashboardTab from './components/fud/DashboardTab';
 import DiaryTab from './components/fud/DiaryTab';
@@ -15,8 +16,14 @@ import {
   saveUserProfile
 } from './utils/storage';
 
+const FoodWidget = registerPlugin('FoodWidget');
+
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [showApiSetup, setShowApiSetup] = useState(() => {
+    try { return !JSON.parse(localStorage.getItem('deepseek_food_settings') || '{}').apiKey?.trim(); }
+    catch { return true; }
+  });
   const [isLogOpen, setIsLogOpen] = useState(false);
   const [targetMealType, setTargetMealType] = useState('lunch');
   const [selectedDate, setSelectedDate] = useState(() => getTodayDateString());
@@ -73,6 +80,22 @@ export default function App() {
   useEffect(() => {
     getMealsByDate(getTodayDateString()).then(setTodayMeals);
   }, []);
+
+  useEffect(() => {
+    if (!Capacitor.isNativePlatform() || Capacitor.getPlatform() !== 'android') return;
+    const totals = todayMeals.reduce((sum, meal) => ({
+      calories: sum.calories + (Number(meal.totalCalories) || 0),
+      protein: sum.protein + (Number(meal.totalProtein) || 0),
+      carbs: sum.carbs + (Number(meal.totalCarbs) || 0),
+      fat: sum.fat + (Number(meal.totalFat) || 0)
+    }), { calories: 0, protein: 0, carbs: 0, fat: 0 });
+    FoodWidget.updateToday({ ...totals, targetCalories: Number(settings.targetCalories) || 2000, date: getTodayDateString() })
+      .catch(() => {});
+  }, [todayMeals, settings.targetCalories]);
+
+  useEffect(() => {
+    if (settings.apiKey?.trim()) setShowApiSetup(false);
+  }, [settings.apiKey]);
 
   const handleSaveSettings = (newSettings) => {
     setSettings(newSettings);
@@ -179,6 +202,25 @@ export default function App() {
           />
         )}
       </main>
+
+      {showApiSetup && (
+        <div role="dialog" aria-modal="true" aria-labelledby="api-setup-title" style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(15, 23, 42, 0.62)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}>
+          <section style={{ width: '100%', maxWidth: '420px', maxHeight: '85vh', overflowY: 'auto', background: '#fff', borderRadius: '24px', padding: '24px', boxShadow: '0 20px 60px rgba(0,0,0,.25)' }}>
+            <div style={{ width: '48px', height: '48px', borderRadius: '16px', background: '#ecfdf5', color: '#059669', display: 'grid', placeItems: 'center', fontSize: '24px', marginBottom: '16px' }}>✦</div>
+            <h2 id="api-setup-title" style={{ margin: '0 0 8px', color: '#0f172a', fontSize: '21px' }}>配置 DeepSeek API Key</h2>
+            <p style={{ margin: '0 0 18px', color: '#64748b', fontSize: '14px', lineHeight: 1.65 }}>配置后即可使用 AI 拍照识别和饮食建议。申请 Key 通常只需几步：</p>
+            <ol style={{ margin: '0 0 18px', paddingLeft: '21px', color: '#334155', fontSize: '14px', lineHeight: 1.8 }}>
+              <li>打开 DeepSeek 开放平台并注册或登录账号。</li>
+              <li>进入 API Keys 页面，创建一个新的 API Key。</li>
+              <li>复制新生成的 Key，回到饭时记设置页粘贴并保存。</li>
+            </ol>
+            <a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noreferrer" style={{ display: 'block', textAlign: 'center', color: '#059669', fontWeight: 700, fontSize: '14px', textDecoration: 'none', padding: '12px', borderRadius: '12px', background: '#ecfdf5', marginBottom: '16px' }}>前往 DeepSeek 官方平台申请 ↗</a>
+            <p style={{ margin: '0 0 18px', color: '#94a3b8', fontSize: '12px', lineHeight: 1.5 }}>API Key 由你自行申请并保存在本机设置中。请勿分享给他人。</p>
+            <button onClick={() => { setShowApiSetup(false); setActiveTab('settings'); }} style={{ width: '100%', border: 0, borderRadius: '14px', padding: '14px', background: '#0f172a', color: '#fff', fontSize: '15px', fontWeight: 700, cursor: 'pointer', marginBottom: '8px' }}>去设置并填写 Key</button>
+            <button onClick={() => setShowApiSetup(false)} style={{ width: '100%', border: 0, background: 'transparent', color: '#64748b', padding: '10px', fontSize: '14px', cursor: 'pointer' }}>稍后再说</button>
+          </section>
+        </div>
+      )}
 
       <LogModal
         isOpen={isLogOpen}
