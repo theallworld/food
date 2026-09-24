@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">食物热量助手</string>
-    <string name="title_activity_main">食物热量助手</string>
+    <string name="app_name">饭时记</string>
+    <string name="title_activity_main">饭时记</string>
     <string name="package_name">com.calorie.foodtracker</string>
     <string name="custom_url_scheme">com.calorie.foodtracker</string>
 </resources>

@@ -37,7 +37,7 @@ yarn-error.log*
 *.key
 *.pem
 
-# Historical APKs (keep latest v1.7 release)
+# Historical APKs (keep latest v1.8 release)
 food-calorie-tracker-v1.1.apk
 food-calorie-tracker-v1.2.apk
 food-calorie-tracker-v1.3.apk

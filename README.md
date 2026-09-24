@@ -1,8 +1,8 @@
-# 🥗 食物热量助手 (Food Calorie Tracker)
+# 🥗 饭时记 (Meal Journal)
 
 > **极简 · 智能 · 科学闭环 · 本地优先** —— 深度融合自然语言实体抽取、权威中餐成分库查表、用油梯度校准与诚实能量区间的现代化饮食与热量管理 Android 应用。
 
-[![GitHub release](https://img.shields.io/badge/release-v1.7-10b981.svg)](https://github.com/theallworld/food)
+[![GitHub release](https://img.shields.io/badge/release-v1.8-10b981.svg)](https://github.com/theallworld/food)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Android%20%7C%20Web-0284c7.svg)](#)
 [![AI Engine](https://img.shields.io/badge/AI%20Engine-DeepSeek--Flash-6366f1.svg)](#)
@@ -16,7 +16,7 @@
 - [3. 现行工程落地方案](#3-现行工程落地方案)
 - [4. 数据源与知识工程](#4-数据源与知识工程)
 - [5. App 核心功能与使用体验](#5-app-核心功能与使用体验)
-- [6. 下载安装与体验 (v1.6)](#6-下载安装与体验-v16)
+- [6. 安装与体验 (v1.8)](#6-安装与体验-v18)
 - [7. 本地开发与构建](#7-本地开发与构建)
 - [8. 权威参考文献与学术出处](#8-权威参考文献与学术出处)
 
@@ -217,14 +217,11 @@
 
 ---
 
-## 6. 下载安装与体验 (v1.7)
+## 6. 安装与体验 (v1.8)
 
-最新编译的 Android APK 安装包存放于项目根目录：
+当前源码版本为 **v1.8**，桌面名称为「饭时记」，Android 启动图标已更新为餐碗与新芽图案。请从当前源码重新构建并安装 APK，已安装的旧版本不会自动更新。
 
-* 📥 [**`食物热量助手_v1.7.apk`**](食物热量助手_v1.7.apk)（**3.6M**，显式版本号推荐）
-* 📥 [**`food-calorie-tracker-v1.7.apk`**](food-calorie-tracker-v1.7.apk)
-
-> 支持 Android 7.0 及以上机型，开箱即用。应用内部界面顶部和设置页均同步回显 `v1.7` 标识。
+仓库中的 v1.7 APK 是旧版安装包，仍显示旧名称和旧图标；它不包含本次更新。
 
 ---
 

@@ -30,7 +30,7 @@ export default function Header({ todayCalories = 0, targetCalories = 2000, onOpe
           <UtensilsCrossed size={20} color="#ffffff" />
         </div>
         <div>
-          <h1 style={{ fontSize: '18px', fontWeight: '700', lineHeight: 1.2 }}>食物热量助手</h1>
+          <h1 style={{ fontSize: '18px', fontWeight: '700', lineHeight: 1.2 }}>饭时记</h1>
           <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', opacity: 0.9 }}>
             <Flame size={12} color="#fef08a" />
             <span>今日已摄入: <strong>{todayCalories}</strong> / {targetCalories} kcal</span>

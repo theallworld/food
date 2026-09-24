@@ -1,6 +1,6 @@
 {
   "appId": "com.calorie.foodtracker",
-  "appName": "食物热量助手",
+  "appName": "饭时记",
   "webDir": "dist",
   "server": {
     "androidScheme": "https"
