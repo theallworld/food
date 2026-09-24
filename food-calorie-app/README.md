@@ -2,7 +2,7 @@
 
 > **极简 · 智能 · 科学闭环 · 本地优先** —— 深度融合自然语言实体抽取、权威中餐成分库查表、用油梯度校准与诚实能量区间的现代化饮食与热量管理 Android 应用。
 
-[![GitHub release](https://img.shields.io/badge/release-v1.6-10b981.svg)](https://github.com/theallworld/food)
+[![GitHub release](https://img.shields.io/badge/release-v1.7-10b981.svg)](https://github.com/theallworld/food)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Android%20%7C%20Web-0284c7.svg)](#)
 [![AI Engine](https://img.shields.io/badge/AI%20Engine-DeepSeek--Flash-6366f1.svg)](#)
@@ -217,14 +217,14 @@
 
 ---
 
-## 6. 下载安装与体验 (v1.6)
+## 6. 下载安装与体验 (v1.7)
 
 最新编译的 Android APK 安装包存放于项目根目录：
 
-* 📥 [**`食物热量助手_v1.6.apk`**](食物热量助手_v1.6.apk)（**3.66 MB**，显式版本号推荐）
-* 📥 [**`食物热量助手.apk`**](食物热量助手.apk)
+* 📥 [**`食物热量助手_v1.7.apk`**](食物热量助手_v1.7.apk)（**3.6M**，显式版本号推荐）
+* 📥 [**`food-calorie-tracker-v1.7.apk`**](food-calorie-tracker-v1.7.apk)
 
-> 支持 Android 7.0 及以上机型，开箱即用。应用内部界面顶部和设置页均同步回显 `v1.6` 标识。
+> 支持 Android 7.0 及以上机型，开箱即用。应用内部界面顶部和设置页均同步回显 `v1.7` 标识。
 
 ---
 
