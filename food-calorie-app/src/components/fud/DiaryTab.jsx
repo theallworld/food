@@ -302,8 +302,8 @@ export default function DiaryTab({
 
                 {/* 详情与热量 */}
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                    <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
+                    <div style={{ flex: '1 1 0%', minWidth: 0 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
                         <span style={{ fontSize: '11px', fontWeight: '700', padding: '1px 6px', borderRadius: '6px', background: '#f1f5f9', color: '#475569' }}>
                           {mealTypeLabels[meal.mealType] || '午餐'}
@@ -312,13 +312,13 @@ export default function DiaryTab({
                           {meal.time}
                         </span>
                       </div>
-                      <div style={{ fontSize: '15px', fontWeight: '800', color: '#0f172a', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      <div style={{ fontSize: '15px', fontWeight: '800', color: '#0f172a', whiteSpace: 'normal', overflowWrap: 'anywhere', lineHeight: 1.45 }}>
                         {formatMealTitle(meal.dishName, meal.foods)}
                       </div>
                     </div>
 
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <span style={{ fontSize: '16px', fontWeight: '900', color: '#ef4444' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+                      <span style={{ fontSize: '16px', fontWeight: '900', color: '#ef4444', whiteSpace: 'nowrap' }}>
                         +{meal.totalCalories} <span style={{ fontSize: '11px', fontWeight: 'normal', color: '#94a3b8' }}>kcal</span>
                       </span>
                       <button
@@ -341,7 +341,7 @@ export default function DiaryTab({
               {meal.foods && meal.foods.length > 0 && (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', paddingTop: '8px', borderTop: '1px dashed #f1f5f9' }}>
                   {meal.foods.map((f, i) => (
-                    <span key={i} style={{ fontSize: '11px', background: '#f8fafc', padding: '3px 8px', borderRadius: '6px', color: '#475569' }}>
+                    <span key={i} style={{ fontSize: '11px', background: '#f8fafc', padding: '3px 8px', borderRadius: '6px', color: '#475569', maxWidth: '100%', whiteSpace: 'normal', overflowWrap: 'anywhere' }}>
                       {f.name} {f.portion && `(${f.portion})`} {f.calories ? `${f.calories}kcal` : ''}
                     </span>
                   ))}

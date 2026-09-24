@@ -106,7 +106,7 @@ export default function SettingsTab({
             BODY & TARGETS · 身体档案与热量预算
           </span>
           <span style={{ fontSize: '11px', fontWeight: '700', color: '#047857', background: '#ecfdf5', padding: '2px 8px', borderRadius: '10px' }}>
-            v1.8
+            v1.8.1
           </span>
         </div>
         <h1 style={{ fontSize: '20px', fontWeight: '800', color: '#0f172a', marginTop: '2px' }}>
