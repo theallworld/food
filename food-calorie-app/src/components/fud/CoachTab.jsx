@@ -2,6 +2,27 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Bot, Send, User, Sparkles, Flame, RefreshCw } from 'lucide-react';
 import { askAICoachWithDeepSeek } from '../../services/deepseek';
 
+const CHAT_STORAGE_KEY = 'food_ai_coach_messages';
+const INITIAL_MESSAGE = {
+  role: 'assistant',
+  content: '你好！我是你的专属 AI 私人营养教练。我已经同步了你今天的饮食数据与身体目标，无论是想咨询晚餐推荐、蛋白质补充、还是减脂调整，随时问我！'
+};
+
+function loadSavedMessages() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(CHAT_STORAGE_KEY) || 'null');
+    if (Array.isArray(saved) && saved.length > 0 && saved.every(message =>
+      (message?.role === 'user' || message?.role === 'assistant') && typeof message.content === 'string'
+    )) return saved;
+  } catch { /* Ignore malformed or unavailable local storage. */ }
+  return [INITIAL_MESSAGE];
+}
+
+function saveMessages(messages) {
+  try { localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(messages)); }
+  catch (error) { console.warn('AI 聊天记录无法保存到本机', error); }
+}
+
 export default function CoachTab({
   todayMeals = [],
   targetCalories = 2000,
@@ -9,14 +30,7 @@ export default function CoachTab({
   settings,
   userProfile = {}
 }) {
-  const [messages, setMessages] = useState(() => {
-    return [
-      {
-        role: 'assistant',
-        content: '你好！我是你的专属 AI 私人营养教练。我已经同步了你今天的饮食数据与身体目标，无论是想咨询晚餐推荐、蛋白质补充、还是减脂调整，随时问我！'
-      }
-    ];
-  });
+  const [messages, setMessages] = useState(loadSavedMessages);
   const [inputVal, setInputVal] = useState('');
   const [isThinking, setIsThinking] = useState(false);
   const messagesEndRef = useRef(null);
@@ -38,11 +52,16 @@ export default function CoachTab({
     scrollToBottom();
   }, [messages, isThinking]);
 
+  useEffect(() => {
+    saveMessages(messages);
+  }, [messages]);
+
   const handleSend = async (textToSend) => {
     const text = (textToSend || inputVal).trim();
     if (!text || isThinking) return;
 
     const newMessages = [...messages, { role: 'user', content: text }];
+    saveMessages(newMessages);
     setMessages(newMessages);
     setInputVal('');
     setIsThinking(true);
@@ -70,10 +89,14 @@ export default function CoachTab({
         model: settings.model
       });
 
-      setMessages([...newMessages, { role: 'assistant', content: reply }]);
+      const completedMessages = [...newMessages, { role: 'assistant', content: reply }];
+      saveMessages(completedMessages);
+      setMessages(completedMessages);
     } catch (err) {
       console.error(err);
-      setMessages([...newMessages, { role: 'assistant', content: `教练暂时掉线了: ${err.message || '请检查网络'}` }]);
+      const failedMessages = [...newMessages, { role: 'assistant', content: `教练暂时掉线了: ${err.message || '请检查网络'}` }];
+      saveMessages(failedMessages);
+      setMessages(failedMessages);
     } finally {
       setIsThinking(false);
     }

@@ -290,7 +290,7 @@ function AppContent({ onRevokePrivacy }) {
   };
 
   const handleClearAllData = async () => {
-    if (!window.confirm('将删除本机全部饮食记录及照片、身体档案、营养目标、API Key 和小组件数据。此操作不可恢复，确定继续吗？')) return;
+    if (!window.confirm('将删除本机全部饮食记录、AI 聊天记录及照片、身体档案、营养目标、API Key 和小组件数据。此操作不可恢复，确定继续吗？')) return;
     try {
       await clearAllMeals();
     } catch {
@@ -307,6 +307,7 @@ function AppContent({ onRevokePrivacy }) {
     localStorage.removeItem('fud_target_macros');
     localStorage.removeItem('deepseek_food_settings');
     localStorage.removeItem('food_ai_data_consent');
+    localStorage.removeItem('food_ai_coach_messages');
     try { await FoodWidget.clearToday(); } catch { /* Web builds have no widget plugin. */ }
     setSettings({ ...DEFAULT_SETTINGS });
     setTargetMacros(DEFAULT_MACROS);
