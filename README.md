@@ -2,7 +2,7 @@
 
 > **极简 · 智能 · 科学闭环 · 本地优先** —— 深度融合自然语言实体抽取、权威中餐成分库查表、用油梯度校准与诚实能量区间的现代化饮食与热量管理 Android 应用。
 
-[![GitHub release](https://img.shields.io/badge/release-v1.8.1-10b981.svg)](https://github.com/theallworld/food)
+[![GitHub release](https://img.shields.io/badge/release-v1.8.2-10b981.svg)](https://github.com/theallworld/food)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Android%20%7C%20Web-0284c7.svg)](#)
 [![AI Engine](https://img.shields.io/badge/AI%20Engine-DeepSeek--Flash-6366f1.svg)](#)
@@ -16,7 +16,7 @@
 - [3. 现行工程落地方案](#3-现行工程落地方案)
 - [4. 数据源与知识工程](#4-数据源与知识工程)
 - [5. App 核心功能与使用体验](#5-app-核心功能与使用体验)
-- [6. 安装与体验 (v1.8.1)](#6-安装与体验-v181)
+- [6. 安装与体验 (v1.8.2)](#6-安装与体验-v182)
 - [7. 本地开发与构建](#7-本地开发与构建)
 - [8. 权威参考文献与学术出处](#8-权威参考文献与学术出处)
 
@@ -217,13 +217,13 @@
 
 ---
 
-## 6. 安装与体验 (v1.8.1)
+## 6. 安装与体验 (v1.8.2)
 
-当前版本为 **v1.8.1**，桌面名称为「饭时记」，Android 启动图标为餐碗与新芽图案。
+当前版本为 **v1.8.2**，桌面名称为「饭时记」，Android 启动图标为餐碗与新芽图案。
 
-* 📥 [**`饭时记_v1.8.1.apk`**](饭时记_v1.8.1.apk)（Android 安装包）
+* 📥 [**`饭时记_v1.8.2.apk`**](饭时记_v1.8.2.apk)（Android 安装包）
 
-安装 v1.8.1 后，手机桌面会显示新名称和新图标。
+安装 v1.8.2 后，手机桌面会显示新名称和新图标。
 
 ---
 

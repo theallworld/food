@@ -1,23 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Key,
   Target,
   ShieldCheck,
-  Database,
   Save,
   CheckCircle2,
-  RotateCcw,
-  User,
-  Calculator,
   Sparkles,
   Activity,
-  Flame,
-  Scale
+  Scale,
+  ChevronDown,
+  Check,
+  X
 } from 'lucide-react';
 import {
   calculateBMI,
-  calculateBMR,
-  calculateTDEE,
   calculateDietPlan,
   ACTIVITY_LEVELS,
   GOALS
@@ -53,10 +49,12 @@ export default function SettingsTab({
 
   const [savedSuccess, setSavedSuccess] = useState(false);
   const [appliedCalcSuccess, setAppliedCalcSuccess] = useState(false);
+  const [activityPickerOpen, setActivityPickerOpen] = useState(false);
 
   // 实时科学推算数据
   const bmiInfo = calculateBMI(profile.height, profile.weight);
   const calculatedPlan = calculateDietPlan(profile);
+  const selectedActivity = ACTIVITY_LEVELS.find(level => level.id === profile.activityLevel) || ACTIVITY_LEVELS[1];
 
   const handleProfileChange = (key, val) => {
     const updated = { ...profile, [key]: val };
@@ -106,7 +104,7 @@ export default function SettingsTab({
             BODY & TARGETS · 身体档案与热量预算
           </span>
           <span style={{ fontSize: '11px', fontWeight: '700', color: '#047857', background: '#ecfdf5', padding: '2px 8px', borderRadius: '10px' }}>
-            v1.8.1
+            v1.8.2
           </span>
         </div>
         <h1 style={{ fontSize: '20px', fontWeight: '800', color: '#0f172a', marginTop: '2px' }}>
@@ -212,17 +210,38 @@ export default function SettingsTab({
         <div style={{ marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <div>
             <label style={{ fontSize: '11px', color: '#64748b', fontWeight: '600', display: 'block', marginBottom: '4px' }}>日常运动活力水平</label>
-            <select
-              value={profile.activityLevel}
-              onChange={(e) => handleProfileChange('activityLevel', e.target.value)}
-              style={{ width: '100%', padding: '9px 10px', borderRadius: '10px', border: '1px solid #cbd5e1', fontSize: '13px', background: '#f8fafc', color: '#0f172a', outline: 'none' }}
+            <button
+              type="button"
+              onClick={() => setActivityPickerOpen(true)}
+              aria-haspopup="dialog"
+              aria-expanded={activityPickerOpen}
+              style={{
+                width: '100%',
+                padding: '9px 12px',
+                borderRadius: '12px',
+                border: '1px solid #e2e8f0',
+                background: '#ffffff',
+                color: '#0f172a',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '10px',
+                textAlign: 'left',
+                cursor: 'pointer',
+                boxShadow: '0 1px 3px rgba(15,23,42,0.04)'
+              }}
             >
-              {ACTIVITY_LEVELS.map(level => (
-                <option key={level.id} value={level.id}>
-                  {level.label}（{level.desc}）
-                </option>
-              ))}
-            </select>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 }}>
+                <span style={{ width: '34px', height: '34px', flexShrink: 0, borderRadius: '10px', background: '#ecfdf5', color: '#059669', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Activity size={17} />
+                </span>
+                <span style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0 }}>
+                  <span style={{ fontSize: '13px', fontWeight: '700' }}>{selectedActivity.label}</span>
+                  <span style={{ fontSize: '11px', color: '#94a3b8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{selectedActivity.desc}</span>
+                </span>
+              </span>
+              <ChevronDown size={18} color="#64748b" />
+            </button>
           </div>
 
           <div>
@@ -455,6 +474,101 @@ export default function SettingsTab({
           所有饮食历史照片与数据均通过 IndexedDB 加密保存在您的手机本地沙盒中。历史记录支持按日期无限期永久回溯。
         </p>
       </div>
+
+      {activityPickerOpen && (
+        <div
+          role="presentation"
+          onClick={() => setActivityPickerOpen(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 1000,
+            display: 'flex',
+            alignItems: 'flex-end',
+            justifyContent: 'center',
+            background: 'rgba(15, 23, 42, 0.58)',
+            backdropFilter: 'blur(3px)',
+            paddingTop: '24px'
+          }}
+        >
+          <section
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="activity-picker-title"
+            onClick={event => event.stopPropagation()}
+            onKeyDown={event => event.key === 'Escape' && setActivityPickerOpen(false)}
+            style={{
+              width: '100%',
+              maxWidth: '560px',
+              maxHeight: '78dvh',
+              overflowY: 'auto',
+              padding: '10px 16px calc(18px + env(safe-area-inset-bottom, 0px))',
+              background: '#f8fafc',
+              borderRadius: '24px 24px 0 0',
+              boxShadow: '0 -12px 36px rgba(15,23,42,0.2)',
+              animation: 'slideUp 0.22s ease-out'
+            }}
+          >
+            <div style={{ width: '36px', height: '4px', borderRadius: '4px', background: '#cbd5e1', margin: '2px auto 14px' }} />
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', marginBottom: '4px' }}>
+              <div>
+                <h2 id="activity-picker-title" style={{ margin: 0, color: '#0f172a', fontSize: '17px', fontWeight: '800' }}>选择日常活动水平</h2>
+                <p style={{ margin: '4px 0 0', color: '#64748b', fontSize: '12px' }}>按你一周的平均运动情况选择</p>
+              </div>
+              <button
+                type="button"
+                aria-label="关闭活动水平选择"
+                onClick={() => setActivityPickerOpen(false)}
+                style={{ width: '34px', height: '34px', flexShrink: 0, border: 'none', borderRadius: '50%', background: '#e2e8f0', color: '#475569', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '16px' }}>
+              {ACTIVITY_LEVELS.map(level => {
+                const isSelected = profile.activityLevel === level.id;
+                return (
+                  <button
+                    key={level.id}
+                    type="button"
+                    aria-pressed={isSelected}
+                    onClick={() => {
+                      handleProfileChange('activityLevel', level.id);
+                      setActivityPickerOpen(false);
+                    }}
+                    style={{
+                      width: '100%',
+                      minHeight: '68px',
+                      padding: '12px 14px',
+                      borderRadius: '16px',
+                      border: isSelected ? '1.5px solid #10b981' : '1px solid #e2e8f0',
+                      background: isSelected ? '#ecfdf5' : '#ffffff',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '12px',
+                      textAlign: 'left',
+                      cursor: 'pointer',
+                      boxShadow: isSelected ? '0 2px 8px rgba(16,185,129,0.08)' : '0 1px 3px rgba(15,23,42,0.03)'
+                    }}
+                  >
+                    <span style={{ width: '36px', height: '36px', flexShrink: 0, borderRadius: '11px', background: isSelected ? '#d1fae5' : '#f1f5f9', color: isSelected ? '#059669' : '#64748b', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Activity size={18} />
+                    </span>
+                    <span style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                      <span style={{ fontSize: '14px', fontWeight: '750', color: isSelected ? '#047857' : '#0f172a' }}>{level.label}</span>
+                      <span style={{ fontSize: '11px', lineHeight: 1.4, color: '#64748b' }}>{level.desc}</span>
+                    </span>
+                    <span style={{ width: '22px', height: '22px', flexShrink: 0, borderRadius: '50%', border: isSelected ? 'none' : '1.5px solid #cbd5e1', background: isSelected ? '#10b981' : 'transparent', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      {isSelected && <Check size={14} strokeWidth={2.5} />}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+        </div>
+      )}
     </div>
   );
 }
