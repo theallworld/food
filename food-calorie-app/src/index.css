@@ -85,3 +85,9 @@ html, body {
   background: #cbd5e1;
   border-radius: 4px;
 }
+
+/* Lucide outline icons share one consistent stroke across the app. */
+svg.lucide {
+  stroke-width: 1.9;
+  flex-shrink: 0;
+}

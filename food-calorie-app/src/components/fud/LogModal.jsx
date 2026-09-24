@@ -92,7 +92,8 @@ function OpenLogModal({
     const oilDiff = oilConfig.cals - COOKING_OIL_LEVELS[3].cals; // 相对外卖基准的增减
     const finalCals = Math.max(200, baseCals + oilDiff);
 
-    // 结构化食材拆解
+    // 结构化食材拆解（使用菜品专属宏量比例，确保蛋白/脂肪/碳水符合实际菜品特征）
+    const ratio = selectedTakeaway.macroRatio || { pro: 0.22, fat: 0.35, carb: 0.43 };
     const foods = [
       {
         id: `takeaway-main-${Date.now()}`,
@@ -101,11 +102,12 @@ function OpenLogModal({
         grams: sizeConfig.grams,
         baseGrams: sizeConfig.grams,
         calories: finalCals,
-        protein: Math.round(finalCals * 0.22 / 4),
-        fat: Math.round(finalCals * 0.35 / 9),
-        carbs: Math.round(finalCals * 0.43 / 4)
+        protein: Math.round(finalCals * ratio.pro / 4),
+        fat: Math.round(finalCals * ratio.fat / 9),
+        carbs: Math.round(finalCals * ratio.carb / 4)
       }
     ];
+
 
     setAnalysisResult({
       dishName: selectedTakeaway.title,

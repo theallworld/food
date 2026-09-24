@@ -82,6 +82,8 @@ export const TAKEAWAY_PRESETS = [
     id: 'huangmenji',
     title: '黄焖鸡米饭',
     category: '快餐盖饭',
+    // 鸡腿肉+米饭：中高脂肪（卤汁含油），碳水偏高
+    macroRatio: { pro: 0.20, fat: 0.38, carb: 0.42 },
     sizes: {
       small: { label: '小份', grams: 380, baseCal: 650, riceG: 220, meatG: 120, oilLevel: 'takeaway_standard' },
       normal: { label: '标准份', grams: 460, baseCal: 820, riceG: 280, meatG: 150, oilLevel: 'takeaway_standard' },
@@ -94,6 +96,8 @@ export const TAKEAWAY_PRESETS = [
     id: 'malatang',
     title: '麻辣烫 / 麻辣香锅',
     category: '热辣烫菜',
+    // 红油底料含大量脂肪，荤素比影响蛋白
+    macroRatio: { pro: 0.18, fat: 0.42, carb: 0.40 },
     sizes: {
       small: { label: '轻量蔬菜多', grams: 400, baseCal: 580, oilLevel: 'home_normal' },
       normal: { label: '经典荤素搭配', grams: 550, baseCal: 880, oilLevel: 'takeaway_standard' },
@@ -106,6 +110,8 @@ export const TAKEAWAY_PRESETS = [
     id: 'lanzhou_lamian',
     title: '兰州牛肉拉面',
     category: '粉面小吃',
+    // 拉面以碳水为主，汤底油脂较少，牛肉提供蛋白
+    macroRatio: { pro: 0.22, fat: 0.18, carb: 0.60 },
     sizes: {
       small: { label: '细面小碗', grams: 350, baseCal: 480, oilLevel: 'home_light' },
       normal: { label: '二细标准碗', grams: 450, baseCal: 650, oilLevel: 'home_normal' },
@@ -118,6 +124,8 @@ export const TAKEAWAY_PRESETS = [
     id: 'zhujiaofan',
     title: '隆江猪脚饭',
     category: '快餐盖饭',
+    // 猪蹄脂肪极高（肥肉+皮），碳水来自米饭
+    macroRatio: { pro: 0.18, fat: 0.45, carb: 0.37 },
     sizes: {
       small: { label: '瘦肉多小份', grams: 400, baseCal: 750, oilLevel: 'takeaway_standard' },
       normal: { label: '半肥半瘦标准', grams: 500, baseCal: 1020, oilLevel: 'takeaway_standard' },
@@ -130,9 +138,13 @@ export const TAKEAWAY_PRESETS = [
     id: 'fried_chicken_burger',
     title: '炸鸡腿汉堡薯条套餐',
     category: '西式快餐',
+    // 油炸裹粉脂肪高，面包+薯条碳水高
+    macroRatio: { pro: 0.18, fat: 0.40, carb: 0.42 },
     sizes: {
+      // 注：small/normal 的 baseCal 仅含汉堡主体热量；
+      // normal 加无糖饮（近0卡），油档沿用 takeaway_standard 仅对汉堡本体有效
       small: { label: '单汉堡', grams: 220, baseCal: 520, oilLevel: 'takeaway_standard' },
-      normal: { label: '汉堡+无糖饮', grams: 500, baseCal: 580, oilLevel: 'takeaway_standard' },
+      normal: { label: '汉堡+无糖饮', grams: 500, baseCal: 525, oilLevel: 'takeaway_standard' },
       large: { label: '汉堡+薯条+含糖饮', grams: 650, baseCal: 1150, oilLevel: 'takeaway_heavy' }
     },
     defaultSize: 'normal',
@@ -142,6 +154,8 @@ export const TAKEAWAY_PRESETS = [
     id: 'light_salad',
     title: '轻食鸡胸肉糙米沙拉',
     category: '健康轻食',
+    // 高蛋白低脂，油醋汁脂肪适中
+    macroRatio: { pro: 0.35, fat: 0.25, carb: 0.40 },
     sizes: {
       small: { label: '小份', grams: 300, baseCal: 340, oilLevel: 'boiled' },
       normal: { label: '标准份', grams: 420, baseCal: 460, oilLevel: 'home_light' },
@@ -154,6 +168,8 @@ export const TAKEAWAY_PRESETS = [
     id: 'mapo_tofu_rice',
     title: '麻婆豆腐盖浇饭',
     category: '快餐盖饭',
+    // 豆腐+肉末+豆瓣酱，中高脂肪，米饭提供碳水
+    macroRatio: { pro: 0.18, fat: 0.38, carb: 0.44 },
     sizes: {
       small: { label: '少饭小份', grams: 380, baseCal: 580, oilLevel: 'takeaway_standard' },
       normal: { label: '标准盖饭', grams: 480, baseCal: 780, oilLevel: 'takeaway_standard' },

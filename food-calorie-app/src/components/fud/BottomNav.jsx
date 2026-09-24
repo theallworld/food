@@ -36,7 +36,7 @@ export default function BottomNav({ activeTab, onTabChange, onOpenLog }) {
           transition: 'color 0.2s'
         }}
       >
-        <LayoutGrid size={20} strokeWidth={activeTab === 'dashboard' ? 2.5 : 1.8} />
+        <LayoutGrid size={20} />
         <span style={{ fontSize: '11px', fontWeight: activeTab === 'dashboard' ? '700' : '500' }}>总览</span>
       </button>
 
@@ -56,7 +56,7 @@ export default function BottomNav({ activeTab, onTabChange, onOpenLog }) {
           transition: 'color 0.2s'
         }}
       >
-        <BookOpen size={20} strokeWidth={activeTab === 'diary' ? 2.5 : 1.8} />
+        <BookOpen size={20} />
         <span style={{ fontSize: '11px', fontWeight: activeTab === 'diary' ? '700' : '500' }}>日记</span>
       </button>
 
@@ -81,7 +81,7 @@ export default function BottomNav({ activeTab, onTabChange, onOpenLog }) {
           }}
           title="快速智能记餐"
         >
-          <Plus size={28} strokeWidth={2.8} />
+          <Plus size={28} />
         </button>
       </div>
 
@@ -101,7 +101,7 @@ export default function BottomNav({ activeTab, onTabChange, onOpenLog }) {
           transition: 'color 0.2s'
         }}
       >
-        <Bot size={20} strokeWidth={activeTab === 'coach' ? 2.5 : 1.8} />
+        <Bot size={20} />
         <span style={{ fontSize: '11px', fontWeight: activeTab === 'coach' ? '700' : '500' }}>AI教练</span>
       </button>
 
@@ -121,7 +121,7 @@ export default function BottomNav({ activeTab, onTabChange, onOpenLog }) {
           transition: 'color 0.2s'
         }}
       >
-        <Sliders size={20} strokeWidth={activeTab === 'settings' ? 2.5 : 1.8} />
+        <Sliders size={20} />
         <span style={{ fontSize: '11px', fontWeight: activeTab === 'settings' ? '700' : '500' }}>设置</span>
       </button>
     </nav>

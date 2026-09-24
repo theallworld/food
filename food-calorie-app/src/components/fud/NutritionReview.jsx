@@ -773,7 +773,7 @@ export default function NutritionReview({
           boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)'
         }}
       >
-        <Check size={18} strokeWidth={2.5} />
+        <Check size={18} />
         <span>确认并记入 {mealTypes.find(m => m.id === selectedMealType)?.label}</span>
       </button>
     </div>

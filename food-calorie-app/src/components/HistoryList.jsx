@@ -13,7 +13,7 @@ export default function HistoryList({ history = [], onDeleteItem, onClearAll }) 
         alignItems: 'center',
         gap: '8px'
       }}>
-        <Utensils size={32} strokeWidth={1.5} color="#cbd5e1" />
+        <Utensils size={32} color="#cbd5e1" />
         <div style={{ fontSize: '13px' }}>今日还没有饮食记录，快去拍一张吧！</div>
       </div>
     );
