@@ -221,7 +221,7 @@
 
 当前版本为 **v1.8.4**，桌面名称为「饭时记」，现支持 Android 今日营养桌面小组件，外观跟随系统日夜模式。
 
-项目现已加入 iOS 原生工程，iPhone 版本使用同一套界面、饮食记录和本地数据。iOS 首次构建需要 macOS、完整 Xcode 与 CocoaPods；使用 Xcode 打开 `food-calorie-app/ios/App/App.xcworkspace`，选择 `App` scheme 和 iPhone 设备或模拟器后即可构建。相机和照片权限仅在用户使用拍照或选图功能时请求。
+项目现已加入 iOS 原生工程，iPhone 版本使用同一套界面、饮食记录和本地数据，最低支持 iOS 15。iOS 首次构建需要 macOS、完整 Xcode 与 CocoaPods；使用 Xcode 打开 `food-calorie-app/ios/App/App.xcworkspace`，选择 `App` scheme 和 iPhone 设备或模拟器后即可构建。安装到真机或发布应用还需要在 Xcode 配置 Apple 开发者签名。相机和照片权限仅在用户使用拍照或选图功能时请求。
 
 * 📥 [**`饭时记_v1.8.4.apk`**](../饭时记_v1.8.4.apk)（Android 安装包）
 
