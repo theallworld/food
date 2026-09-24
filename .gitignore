@@ -6,6 +6,7 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+AGENTS.md
 
 # Node dependencies and build
 node_modules/

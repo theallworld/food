@@ -1,10 +1,10 @@
 # 🥗 饭时记 (Meal Journal)
 
-> **极简 · 智能 · 科学闭环 · 本地优先** —— 深度融合自然语言实体抽取、权威中餐成分库查表、用油梯度校准与诚实能量区间的现代化饮食与热量管理 Android 应用。
+> **极简 · 智能 · 科学闭环 · 本地优先** —— 深度融合自然语言实体抽取、权威中餐成分库查表、用油梯度校准与诚实能量区间的饮食与热量管理应用。
 
 [![GitHub release](https://img.shields.io/badge/release-v1.8.4-10b981.svg)](https://github.com/theallworld/food)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Platform](https://img.shields.io/badge/platform-Android%20%7C%20Web-0284c7.svg)](#)
+[![Platform](https://img.shields.io/badge/platform-Android%20%7C%20iOS%20%7C%20Web-0284c7.svg)](#)
 [![AI Engine](https://img.shields.io/badge/AI%20Engine-DeepSeek--Flash-6366f1.svg)](#)
 
 ---
@@ -221,6 +221,8 @@
 
 当前版本为 **v1.8.4**，桌面名称为「饭时记」，现支持 Android 今日营养桌面小组件，外观跟随系统日夜模式。
 
+项目现已加入 iOS 原生工程，iPhone 版本使用同一套界面、饮食记录和本地数据。iOS 首次构建需要 macOS、完整 Xcode 与 CocoaPods；使用 Xcode 打开 `food-calorie-app/ios/App/App.xcworkspace`，选择 `App` scheme 和 iPhone 设备或模拟器后即可构建。相机和照片权限仅在用户使用拍照或选图功能时请求。
+
 * 📥 [**`饭时记_v1.8.4.apk`**](../饭时记_v1.8.4.apk)（Android 安装包）
 
 安装 v1.8.4 后，可在手机桌面长按空白处，打开“小组件”列表并添加「今日营养」。
@@ -248,6 +250,11 @@ cd android
 export JAVA_HOME=/opt/homebrew/opt/openjdk@17
 export ANDROID_HOME=$HOME/Library/Android/sdk
 ./gradlew assembleDebug
+
+# iOS（仅 macOS，需先安装完整 Xcode 与 CocoaPods）
+cd ..
+npx cap sync ios
+open ios/App/App.xcworkspace
 ```
 
 ---
