@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="widget_card">#0B1020</color>
+    <color name="widget_macro_card">#182137</color>
+    <color name="widget_border">#2B3650</color>
+    <color name="widget_text_primary">#F8FAFC</color>
+    <color name="widget_text_muted">#A8B4C8</color>
+    <color name="widget_status_text">#A7F3D0</color>
+    <color name="widget_accent">#52D39A</color>
+    <color name="widget_track">#303C56</color>
+    <color name="widget_protein">#FCA5A5</color>
+    <color name="widget_carbs">#93C5FD</color>
+    <color name="widget_fat">#FDE68A</color>
+</resources>

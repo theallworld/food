@@ -6,19 +6,34 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:background="@drawable/food_widget_background">
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="饭时记 · 今日摄入" android:textColor="#64748B" android:textSize="13sp" android:textStyle="bold" />
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="bottom" android:layout_marginTop="5dp">
-        <TextView android:id="@+id/widget_calories" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="#0F172A" android:textSize="30sp" android:textStyle="bold" />
-        <TextView android:id="@+id/widget_target" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="/ 2000 kcal" android:textColor="#94A3B8" android:textSize="13sp" android:layout_marginStart="6dp" android:layout_marginBottom="4dp" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="剩余可摄入" android:textColor="@color/widget_text_muted" android:textSize="12sp" />
+            <TextView android:id="@+id/widget_date" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="今日营养总览" android:textColor="@color/widget_text_muted" android:textSize="11sp" android:layout_marginTop="2dp" />
+        </LinearLayout>
+        <TextView android:id="@+id/widget_status" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="已摄入 0 kcal" android:textColor="@color/widget_status_text" android:textSize="12sp" android:background="@drawable/food_widget_chip" android:paddingLeft="10dp" android:paddingRight="10dp" android:paddingTop="7dp" android:paddingBottom="7dp" />
     </LinearLayout>
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="9dp">
-        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="蛋白质" android:textColor="#64748B" android:textSize="11sp" />
-        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="碳水" android:textColor="#64748B" android:textSize="11sp" />
-        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="脂肪" android:textColor="#64748B" android:textSize="11sp" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="bottom" android:orientation="horizontal" android:layout_marginTop="8dp">
+        <TextView android:id="@+id/widget_calories" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2000" android:textColor="@color/widget_text_primary" android:textSize="38sp" android:textStyle="bold" android:includeFontPadding="false" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="kcal" android:textColor="@color/widget_text_muted" android:textSize="14sp" android:layout_marginStart="6dp" android:layout_marginBottom="4dp" />
+        <TextView android:id="@+id/widget_target" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="end" android:text="目标 2000 kcal" android:textColor="@color/widget_text_muted" android:textSize="12sp" android:layout_marginBottom="5dp" />
     </LinearLayout>
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-        <TextView android:id="@+id/widget_protein" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="0g" android:textColor="#0F172A" android:textSize="14sp" android:textStyle="bold" />
-        <TextView android:id="@+id/widget_carbs" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="0g" android:textColor="#0F172A" android:textSize="14sp" android:textStyle="bold" />
-        <TextView android:id="@+id/widget_fat" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="0g" android:textColor="#0F172A" android:textSize="14sp" android:textStyle="bold" />
+    <ProgressBar android:id="@+id/widget_calories_progress" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="8dp" android:layout_marginTop="10dp" android:progress="0" android:max="100" android:progressTint="@color/widget_accent" android:progressBackgroundTint="@color/widget_track" android:indeterminate="false" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginTop="14dp">
+        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center_vertical" android:padding="10dp" android:background="@drawable/food_widget_macro_background" android:layout_marginEnd="7dp">
+            <TextView android:id="@+id/widget_protein_label" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="蛋白质 · 0%" android:textColor="@color/widget_protein" android:textSize="11sp" />
+            <TextView android:id="@+id/widget_protein" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0/130g" android:textColor="@color/widget_text_primary" android:textSize="16sp" android:textStyle="bold" android:layout_marginTop="5dp" />
+            <ProgressBar android:id="@+id/widget_protein_progress" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="5dp" android:layout_marginTop="7dp" android:progress="0" android:max="100" android:progressTint="@color/widget_protein" android:progressBackgroundTint="@color/widget_track" android:indeterminate="false" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center_vertical" android:padding="10dp" android:background="@drawable/food_widget_macro_background" android:layout_marginLeft="3dp" android:layout_marginRight="3dp">
+            <TextView android:id="@+id/widget_carbs_label" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="碳水 · 0%" android:textColor="@color/widget_carbs" android:textSize="11sp" />
+            <TextView android:id="@+id/widget_carbs" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0/220g" android:textColor="@color/widget_text_primary" android:textSize="16sp" android:textStyle="bold" android:layout_marginTop="5dp" />
+            <ProgressBar android:id="@+id/widget_carbs_progress" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="5dp" android:layout_marginTop="7dp" android:progress="0" android:max="100" android:progressTint="@color/widget_carbs" android:progressBackgroundTint="@color/widget_track" android:indeterminate="false" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center_vertical" android:padding="10dp" android:background="@drawable/food_widget_macro_background" android:layout_marginStart="7dp">
+            <TextView android:id="@+id/widget_fat_label" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="脂肪 · 0%" android:textColor="@color/widget_fat" android:textSize="11sp" />
+            <TextView android:id="@+id/widget_fat" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0/65g" android:textColor="@color/widget_text_primary" android:textSize="16sp" android:textStyle="bold" android:layout_marginTop="5dp" />
+            <ProgressBar android:id="@+id/widget_fat_progress" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="5dp" android:layout_marginTop="7dp" android:progress="0" android:max="100" android:progressTint="@color/widget_fat" android:progressBackgroundTint="@color/widget_track" android:indeterminate="false" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

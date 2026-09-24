@@ -167,7 +167,7 @@ function OpenLogModal({
       zIndex: 50
     }}>
       <div style={{
-        background: '#ffffff',
+        background: 'var(--surface)',
         width: '100%',
         maxWidth: '480px',
         borderTopLeftRadius: '28px',
@@ -199,13 +199,13 @@ function OpenLogModal({
                 <span style={{ fontSize: '11px', fontWeight: '700', color: '#10b981', letterSpacing: '0.04em' }}>
                   FUD NUTRITION · 科学记餐
                 </span>
-                <h2 style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a' }}>
+                <h2 style={{ fontSize: '18px', fontWeight: '800', color: 'var(--text-main)' }}>
                   记录今日进食
                 </h2>
               </div>
               <button
                 onClick={onClose}
-                style={{ border: 'none', background: '#f1f5f9', width: '32px', height: '32px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#64748b' }}
+                style={{ border: 'none', background: 'var(--surface-muted)', width: '32px', height: '32px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--text-muted)' }}
               >
                 <X size={18} />
               </button>
@@ -231,7 +231,7 @@ function OpenLogModal({
             {/* 核心模式切换器：口述为主、外卖点选、实拍辅助 */}
             <div style={{
               display: 'flex',
-              background: '#f1f5f9',
+              background: 'var(--surface-muted)',
               padding: '4px',
               borderRadius: '16px',
               marginBottom: '16px'
@@ -312,7 +312,7 @@ function OpenLogModal({
             {/* 错误提示 */}
             {errorMessage && (
               <div style={{
-                background: '#fef2f2',
+                background: 'var(--danger-surface)',
                 border: '1px solid #fecaca',
                 color: '#dc2626',
                 padding: '10px 14px',
@@ -341,7 +341,7 @@ function OpenLogModal({
                       width: '100%',
                       padding: '12px',
                       borderRadius: '16px',
-                      border: '1.5px solid #cbd5e1',
+                      border: '1.5px solid var(--border-color)',
                       fontSize: '14px',
                       lineHeight: 1.5,
                       outline: 'none',
@@ -349,7 +349,7 @@ function OpenLogModal({
                       boxSizing: 'border-box'
                     }}
                   />
-                  <div style={{ fontSize: '11px', color: '#64748b', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
                     <Info size={12} color="#10b981" />
                     <span>遵循决策：大模型仅负责实体抽取，卡路里由国家成分表查表换算</span>
                   </div>
@@ -357,7 +357,7 @@ function OpenLogModal({
 
                 {/* 快捷示例 */}
                 <div>
-                  <div style={{ fontSize: '11px', fontWeight: '700', color: '#64748b', marginBottom: '6px' }}>常见快记搭配：</div>
+                  <div style={{ fontSize: '11px', fontWeight: '700', color: 'var(--text-muted)', marginBottom: '6px' }}>常见快记搭配：</div>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                     {quickTextPrompts.map((prompt, i) => (
                       <button
@@ -367,13 +367,13 @@ function OpenLogModal({
                           setTextInput(prompt);
                         }}
                         style={{
-                          background: '#f8fafc',
+                          background: 'var(--bg-main)',
                           padding: '5px 10px',
                           borderRadius: '8px',
                           fontSize: '11px',
-                          color: '#334155',
+                          color: 'var(--text-secondary)',
                           cursor: 'pointer',
-                          border: '1px solid #e2e8f0'
+                          border: '1px solid var(--border-color)'
                         }}
                       >
                         {prompt}
@@ -419,13 +419,13 @@ function OpenLogModal({
             {/* 模式 2：外卖快选点选流（解决外卖大变量） */}
             {mode === 'takeaway' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-                <div style={{ fontSize: '11px', color: '#b45309', background: '#fef3c7', padding: '8px 12px', borderRadius: '10px' }}>
+                <div style={{ fontSize: '11px', color: '#b45309', background: 'var(--warning-surface)', padding: '8px 12px', borderRadius: '10px' }}>
                   🥡 <b>外卖场景特化</b>：实测一份外卖达 1000~2200 kcal。点选份量与油量，消除 50% 核心误差。
                 </div>
 
                 {/* 常见外卖菜品列表 */}
                 <div>
-                  <div style={{ fontSize: '12px', fontWeight: '700', color: '#0f172a', marginBottom: '8px' }}>
+                  <div style={{ fontSize: '12px', fontWeight: '700', color: 'var(--text-main)', marginBottom: '8px' }}>
                     选择外卖菜品：
                   </div>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px' }}>
@@ -443,8 +443,8 @@ function OpenLogModal({
                           cursor: 'pointer'
                         }}
                       >
-                        <div style={{ fontSize: '13px', fontWeight: '800', color: '#0f172a' }}>{item.title}</div>
-                        <div style={{ fontSize: '11px', color: '#64748b', marginTop: '2px' }}>{item.category}</div>
+                        <div style={{ fontSize: '13px', fontWeight: '800', color: 'var(--text-main)' }}>{item.title}</div>
+                        <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px' }}>{item.category}</div>
                       </button>
                     ))}
                   </div>
@@ -452,7 +452,7 @@ function OpenLogModal({
 
                 {/* 份量规格选择 */}
                 <div>
-                  <div style={{ fontSize: '12px', fontWeight: '700', color: '#0f172a', marginBottom: '6px' }}>
+                  <div style={{ fontSize: '12px', fontWeight: '700', color: 'var(--text-main)', marginBottom: '6px' }}>
                     份量规格：
                   </div>
                   <div style={{ display: 'flex', gap: '8px' }}>
@@ -481,7 +481,7 @@ function OpenLogModal({
 
                 {/* 用油程度选择（最大变量） */}
                 <div>
-                  <div style={{ fontSize: '12px', fontWeight: '700', color: '#0f172a', marginBottom: '6px' }}>
+                  <div style={{ fontSize: '12px', fontWeight: '700', color: 'var(--text-main)', marginBottom: '6px' }}>
                     烹饪用油档位（决定性变量）：
                   </div>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
@@ -541,8 +541,8 @@ function OpenLogModal({
             {mode === 'camera' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                 <div style={{
-                  background: '#f8fafc',
-                  border: '1px dashed #cbd5e1',
+                  background: 'var(--bg-main)',
+                  border: '1px dashed var(--border-color)',
                   borderRadius: '16px',
                   padding: '16px',
                   textAlign: 'center'
@@ -578,9 +578,9 @@ function OpenLogModal({
                         flex: 1,
                         padding: '14px',
                         borderRadius: '14px',
-                        background: '#ffffff',
-                        color: '#0f172a',
-                        border: '1px solid #cbd5e1',
+                        background: 'var(--surface)',
+                        color: 'var(--text-main)',
+                        border: '1px solid var(--border-color)',
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
@@ -595,7 +595,7 @@ function OpenLogModal({
                     </button>
                   </div>
 
-                  <div style={{ fontSize: '11px', color: '#64748b', lineHeight: 1.5, textAlign: 'left' }}>
+                  <div style={{ fontSize: '11px', color: 'var(--text-muted)', lineHeight: 1.5, textAlign: 'left' }}>
                     <b>💡 科学说明</b>：实测照片由于透视与隐藏烹饪油，误差约为 33~55%。拍照主要用于日记存根与容器刻度校准，建议拍照后在下一步核对中确认具体用油与克重。
                   </div>
                 </div>

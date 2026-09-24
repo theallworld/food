@@ -73,7 +73,7 @@ export default function CameraCapture({
           onClick={onOpenSettings}
           style={{
             padding: '12px 16px',
-            backgroundColor: '#fef3c7',
+            backgroundColor: 'var(--warning-surface)',
             border: '1px solid #fde68a',
             borderRadius: '14px',
             display: 'flex',
@@ -93,7 +93,7 @@ export default function CameraCapture({
       {errorMessage && (
         <div style={{
           padding: '12px 16px',
-          backgroundColor: '#fee2e2',
+          backgroundColor: 'var(--danger-surface)',
           border: '1px solid #fecaca',
           borderRadius: '14px',
           color: '#b91c1c',
@@ -188,21 +188,21 @@ export default function CameraCapture({
         </div>
       ) : (
         <div style={{
-          border: '2px dashed #cbd5e1',
+          border: '2px dashed var(--border-color)',
           borderRadius: '24px',
           padding: '28px 18px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#f8fafc',
+          backgroundColor: 'var(--bg-main)',
           textAlign: 'center'
         }}>
           <div style={{
             width: '56px',
             height: '56px',
             borderRadius: '50%',
-            backgroundColor: '#d1fae5',
+            backgroundColor: 'var(--accent-surface)',
             color: '#10b981',
             display: 'flex',
             alignItems: 'center',
@@ -212,16 +212,16 @@ export default function CameraCapture({
             <Camera size={28} />
           </div>
 
-          <h3 style={{ fontSize: '16px', fontWeight: '700', color: '#1e293b', marginBottom: '4px' }}>
+          <h3 style={{ fontSize: '16px', fontWeight: '700', color: 'var(--text-main)', marginBottom: '4px' }}>
             拍摄或上传餐盘
           </h3>
-          <p style={{ fontSize: '12px', color: '#64748b', maxWidth: '280px', marginBottom: '16px' }}>
+          <p style={{ fontSize: '12px', color: 'var(--text-muted)', maxWidth: '280px', marginBottom: '16px' }}>
             可拍入餐具/手掌作为比例尺，识别更准
           </p>
 
           {/* 辅助补充说明输入框（大幅提升准确度） */}
           <div style={{ width: '100%', maxWidth: '340px', marginBottom: '16px', textAlign: 'left' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', fontWeight: '600', color: '#475569', marginBottom: '6px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '6px' }}>
               <Edit3 size={13} color="#10b981" />
               <span>给 AI 的补充小提示（可选，精准度翻倍）：</span>
             </div>
@@ -234,10 +234,10 @@ export default function CameraCapture({
                 width: '100%',
                 padding: '9px 12px',
                 borderRadius: '12px',
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border-color)',
                 fontSize: '13px',
                 outline: 'none',
-                backgroundColor: '#ffffff'
+                backgroundColor: 'var(--surface)'
               }}
             />
           </div>
@@ -272,9 +272,9 @@ export default function CameraCapture({
               style={{
                 padding: '13px 16px',
                 borderRadius: '14px',
-                backgroundColor: '#ffffff',
-                color: '#334155',
-                border: '1px solid #cbd5e1',
+                backgroundColor: 'var(--surface)',
+                color: 'var(--text-secondary)',
+                border: '1px solid var(--border-color)',
                 fontWeight: '600',
                 fontSize: '14px',
                 display: 'flex',
@@ -293,7 +293,7 @@ export default function CameraCapture({
 
       {!previewImage && (
         <div style={{ marginTop: '4px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '600', color: '#475569', marginBottom: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '8px' }}>
             <Sparkles size={14} color="#f59e0b" />
             <span>无餐食在手？点击直接测试样例：</span>
           </div>
@@ -305,9 +305,9 @@ export default function CameraCapture({
                 style={{
                   borderRadius: '12px',
                   overflow: 'hidden',
-                  border: '1px solid #e2e8f0',
+                  border: '1px solid var(--border-color)',
                   cursor: 'pointer',
-                  backgroundColor: '#ffffff',
+                  backgroundColor: 'var(--surface)',
                   boxShadow: '0 2px 4px rgba(0,0,0,0.04)',
                   textAlign: 'center'
                 }}
@@ -317,7 +317,7 @@ export default function CameraCapture({
                   alt={sample.title}
                   style={{ width: '100%', height: '65px', objectFit: 'cover' }}
                 />
-                <div style={{ padding: '6px 4px', fontSize: '11px', fontWeight: '500', color: '#334155' }}>
+                <div style={{ padding: '6px 4px', fontSize: '11px', fontWeight: '500', color: 'var(--text-secondary)' }}>
                   {sample.title}
                 </div>
               </div>

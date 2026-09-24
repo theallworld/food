@@ -90,9 +90,9 @@ export default function CoachTab({
     <div style={{ padding: '16px 16px 90px 16px', display: 'flex', flexDirection: 'column', height: '100vh', boxSizing: 'border-box' }}>
       {/* 顶部教练状态与今日饮食缩影 */}
       <div style={{
-        background: '#ffffff',
+        background: 'var(--surface)',
         borderRadius: '20px',
-        border: '1px solid #e2e8f0',
+        border: '1px solid var(--border-color)',
         padding: '14px 16px',
         marginBottom: '12px',
         boxShadow: '0 2px 4px rgba(0,0,0,0.02)'
@@ -103,14 +103,14 @@ export default function CoachTab({
               <Bot size={22} />
             </div>
             <div>
-              <div style={{ fontSize: '15px', fontWeight: '800', color: '#0f172a' }}>Fud AI 营养私教</div>
+              <div style={{ fontSize: '15px', fontWeight: '800', color: 'var(--text-main)' }}>Fud AI 营养私教</div>
               <div style={{ fontSize: '11px', color: '#10b981', fontWeight: '600' }}>● 已同步今日饮食档案</div>
             </div>
           </div>
 
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: '12px', fontWeight: '800', color: '#0f172a' }}>{totalCalories} / {targetCalories} kcal</div>
-            <div style={{ fontSize: '10px', color: '#94a3b8' }}>蛋白 {totalProtein}/{targetMacros.protein}g</div>
+            <div style={{ fontSize: '12px', fontWeight: '800', color: 'var(--text-main)' }}>{totalCalories} / {targetCalories} kcal</div>
+            <div style={{ fontSize: '10px', color: 'var(--text-soft)' }}>蛋白 {totalProtein}/{targetMacros.protein}g</div>
           </div>
         </div>
       </div>
@@ -156,8 +156,8 @@ export default function CoachTab({
         ))}
 
         {isThinking && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#94a3b8', fontSize: '12px', paddingLeft: '36px' }}>
-            <div style={{ width: '16px', height: '16px', border: '2px solid #cbd5e1', borderTopColor: '#10b981', borderRadius: '50%' }} className="animate-spin" />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-soft)', fontSize: '12px', paddingLeft: '36px' }}>
+            <div style={{ width: '16px', height: '16px', border: '2px solid var(--border-color)', borderTopColor: '#10b981', borderRadius: '50%' }} className="animate-spin" />
             <span>教练正在阅读你的饮食数据并思考建议...</span>
           </div>
         )}
@@ -173,12 +173,12 @@ export default function CoachTab({
             onClick={() => handleSend(p)}
             style={{
               flexShrink: 0,
-              border: '1px solid #e2e8f0',
-              background: '#ffffff',
+              border: '1px solid var(--border-color)',
+              background: 'var(--surface)',
               padding: '6px 10px',
               borderRadius: '16px',
               fontSize: '11px',
-              color: '#475569',
+              color: 'var(--text-secondary)',
               cursor: 'pointer',
               whiteSpace: 'nowrap'
             }}
@@ -200,10 +200,10 @@ export default function CoachTab({
             flex: 1,
             padding: '12px 14px',
             borderRadius: '16px',
-            border: '1px solid #cbd5e1',
+            border: '1px solid var(--border-color)',
             fontSize: '14px',
             outline: 'none',
-            background: '#ffffff'
+            background: 'var(--surface)'
           }}
         />
         <button

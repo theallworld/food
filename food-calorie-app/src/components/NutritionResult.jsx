@@ -102,7 +102,7 @@ export default function NutritionResult({ result, onSaveToDiary, isSaved }) {
             <span style={{ fontSize: '11px', fontWeight: '600', color: '#10b981', letterSpacing: '0.05em' }}>
               识别完成 · 支持手动修正
             </span>
-            <h2 style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', marginTop: '2px' }}>
+            <h2 style={{ fontSize: '18px', fontWeight: '800', color: 'var(--text-main)', marginTop: '2px' }}>
               {result.dishName || '餐食记录'}
             </h2>
           </div>
@@ -110,7 +110,7 @@ export default function NutritionResult({ result, onSaveToDiary, isSaved }) {
             display: 'flex',
             alignItems: 'center',
             gap: '4px',
-            background: '#dcfce7',
+            background: 'var(--accent-surface)',
             padding: '4px 10px',
             borderRadius: '20px',
             color: '#15803d',
@@ -125,14 +125,14 @@ export default function NutritionResult({ result, onSaveToDiary, isSaved }) {
         {/* 热量巨星数字 */}
         <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginBottom: '14px' }}>
           <Flame size={28} color="#ef4444" style={{ alignSelf: 'center' }} />
-          <span style={{ fontSize: '42px', fontWeight: '900', color: '#0f172a', letterSpacing: '-0.03em', lineHeight: 1 }}>
+          <span style={{ fontSize: '42px', fontWeight: '900', color: 'var(--text-main)', letterSpacing: '-0.03em', lineHeight: 1 }}>
             {totalCalories}
           </span>
-          <span style={{ fontSize: '16px', fontWeight: '600', color: '#64748b' }}>千卡 (kcal)</span>
+          <span style={{ fontSize: '16px', fontWeight: '600', color: 'var(--text-muted)' }}>千卡 (kcal)</span>
         </div>
 
         {/* 快捷分量缩放按钮 */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '14px', fontSize: '12px', color: '#475569' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '14px', fontSize: '12px', color: 'var(--text-secondary)' }}>
           <span>整体食量：</span>
           {[
             { label: '半份 (0.5x)', scale: 0.5 },
@@ -159,24 +159,24 @@ export default function NutritionResult({ result, onSaveToDiary, isSaved }) {
 
         {/* 三大营养素条 */}
         <div style={{ marginBottom: '16px' }}>
-          <div style={{ display: 'flex', height: '10px', borderRadius: '6px', overflow: 'hidden', backgroundColor: '#e2e8f0', marginBottom: '10px' }}>
+          <div style={{ display: 'flex', height: '10px', borderRadius: '6px', overflow: 'hidden', backgroundColor: 'var(--surface-muted)', marginBottom: '10px' }}>
             <div style={{ width: `${proteinPct}%`, backgroundColor: '#ef4444' }} />
             <div style={{ width: `${carbsPct}%`, backgroundColor: '#3b82f6' }} />
             <div style={{ width: `${fatPct}%`, backgroundColor: '#f59e0b' }} />
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
-            <div style={{ background: '#fef2f2', padding: '8px 10px', borderRadius: '12px', border: '1px solid #fee2e2' }}>
+            <div style={{ background: 'var(--danger-surface)', padding: '8px 10px', borderRadius: '12px', border: '1px solid #fee2e2' }}>
               <div style={{ fontSize: '11px', color: '#dc2626', fontWeight: '600' }}>蛋白质</div>
               <div style={{ fontSize: '15px', fontWeight: '800', color: '#991b1b', marginTop: '2px' }}>{totalProtein}g</div>
               <div style={{ fontSize: '10px', color: '#b91c1c' }}>{proteinPct}%</div>
             </div>
-            <div style={{ background: '#eff6ff', padding: '8px 10px', borderRadius: '12px', border: '1px solid #dbeafe' }}>
+            <div style={{ background: 'var(--info-surface)', padding: '8px 10px', borderRadius: '12px', border: '1px solid #dbeafe' }}>
               <div style={{ fontSize: '11px', color: '#2563eb', fontWeight: '600' }}>碳水</div>
               <div style={{ fontSize: '15px', fontWeight: '800', color: '#1e40af', marginTop: '2px' }}>{totalCarbs}g</div>
               <div style={{ fontSize: '10px', color: '#1d4ed8' }}>{carbsPct}%</div>
             </div>
-            <div style={{ background: '#fffbeb', padding: '8px 10px', borderRadius: '12px', border: '1px solid #fef3c7' }}>
+            <div style={{ background: 'var(--warning-surface)', padding: '8px 10px', borderRadius: '12px', border: '1px solid #fef3c7' }}>
               <div style={{ fontSize: '11px', color: '#d97706', fontWeight: '600' }}>脂肪</div>
               <div style={{ fontSize: '15px', fontWeight: '800', color: '#92400e', marginTop: '2px' }}>{totalFat}g</div>
               <div style={{ fontSize: '10px', color: '#b45309' }}>{fatPct}%</div>
@@ -221,25 +221,25 @@ export default function NutritionResult({ result, onSaveToDiary, isSaved }) {
 
       {/* 食材明细与手动修改管理区 */}
       <div style={{
-        background: '#ffffff',
+        background: 'var(--surface)',
         borderRadius: '20px',
-        border: '1px solid #e2e8f0',
+        border: '1px solid var(--border-color)',
         padding: '18px',
         boxShadow: '0 2px 4px rgba(0,0,0,0.02)'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
           <div>
-            <h3 style={{ fontSize: '14px', fontWeight: '700', color: '#334155' }}>
+            <h3 style={{ fontSize: '14px', fontWeight: '700', color: 'var(--text-secondary)' }}>
               🍽️ 盘中食材明细（点击可修改/删除）
             </h3>
-            <span style={{ fontSize: '11px', color: '#94a3b8' }}>若估算有出入，可直接点击修改克数与卡路里</span>
+            <span style={{ fontSize: '11px', color: 'var(--text-soft)' }}>若估算有出入，可直接点击修改克数与卡路里</span>
           </div>
 
           <button
             onClick={() => setIsAddingNew(true)}
             style={{
               border: 'none',
-              background: '#f0fdf4',
+              background: 'var(--accent-surface)',
               color: '#15803d',
               padding: '6px 10px',
               borderRadius: '10px',
@@ -259,7 +259,7 @@ export default function NutritionResult({ result, onSaveToDiary, isSaved }) {
         {/* 添加新食材表单 */}
         {isAddingNew && (
           <div style={{
-            background: '#f8fafc',
+            background: 'var(--bg-main)',
             border: '1px dashed #10b981',
             borderRadius: '14px',
             padding: '12px',
@@ -268,34 +268,34 @@ export default function NutritionResult({ result, onSaveToDiary, isSaved }) {
             flexDirection: 'column',
             gap: '8px'
           }}>
-            <div style={{ fontSize: '12px', fontWeight: '700', color: '#0f172a' }}>添加遗漏的食物/加餐：</div>
+            <div style={{ fontSize: '12px', fontWeight: '700', color: 'var(--text-main)' }}>添加遗漏的食物/加餐：</div>
             <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: '6px' }}>
               <input
                 type="text"
                 placeholder="食物名称 (如米饭)"
                 value={newFood.name}
                 onChange={(e) => setNewFood({ ...newFood, name: e.target.value })}
-                style={{ padding: '6px 8px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '12px' }}
+                style={{ padding: '6px 8px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '12px' }}
               />
               <input
                 type="text"
                 placeholder="分量 (如150g)"
                 value={newFood.portion}
                 onChange={(e) => setNewFood({ ...newFood, portion: e.target.value })}
-                style={{ padding: '6px 8px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '12px' }}
+                style={{ padding: '6px 8px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '12px' }}
               />
               <input
                 type="number"
                 placeholder="热量 (kcal)"
                 value={newFood.calories}
                 onChange={(e) => setNewFood({ ...newFood, calories: e.target.value })}
-                style={{ padding: '6px 8px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '12px' }}
+                style={{ padding: '6px 8px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '12px' }}
               />
             </div>
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
               <button
                 onClick={() => setIsAddingNew(false)}
-                style={{ border: 'none', background: '#e2e8f0', padding: '6px 12px', borderRadius: '8px', fontSize: '12px', cursor: 'pointer' }}
+                style={{ border: 'none', background: 'var(--surface-muted)', padding: '6px 12px', borderRadius: '8px', fontSize: '12px', cursor: 'pointer' }}
               >
                 取消
               </button>
@@ -330,25 +330,25 @@ export default function NutritionResult({ result, onSaveToDiary, isSaved }) {
                       type="text"
                       value={editForm.name}
                       onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
-                      style={{ padding: '6px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '13px' }}
+                      style={{ padding: '6px', borderRadius: '6px', border: '1px solid var(--border-color)', fontSize: '13px' }}
                     />
                     <input
                       type="text"
                       value={editForm.portion}
                       onChange={(e) => setEditForm({ ...editForm, portion: e.target.value })}
-                      style={{ padding: '6px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '13px' }}
+                      style={{ padding: '6px', borderRadius: '6px', border: '1px solid var(--border-color)', fontSize: '13px' }}
                     />
                     <input
                       type="number"
                       value={editForm.calories}
                       onChange={(e) => setEditForm({ ...editForm, calories: e.target.value })}
-                      style={{ padding: '6px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '13px' }}
+                      style={{ padding: '6px', borderRadius: '6px', border: '1px solid var(--border-color)', fontSize: '13px' }}
                     />
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '6px' }}>
                     <button
                       onClick={() => setEditingIndex(null)}
-                      style={{ border: 'none', background: '#e2e8f0', padding: '4px 8px', borderRadius: '6px', fontSize: '11px', cursor: 'pointer' }}
+                      style={{ border: 'none', background: 'var(--surface-muted)', padding: '4px 8px', borderRadius: '6px', fontSize: '11px', cursor: 'pointer' }}
                     >
                       取消
                     </button>
@@ -364,10 +364,10 @@ export default function NutritionResult({ result, onSaveToDiary, isSaved }) {
                 /* 正常展示行 */
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: '14px', fontWeight: '600', color: '#1e293b' }}>
+                    <div style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-main)' }}>
                       {food.name}
                     </div>
-                    <div style={{ fontSize: '12px', color: '#64748b' }}>
+                    <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
                       分量: {food.portion}
                     </div>
                   </div>
@@ -375,9 +375,9 @@ export default function NutritionResult({ result, onSaveToDiary, isSaved }) {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <div style={{ textAlign: 'right' }}>
                       <div style={{ fontSize: '15px', fontWeight: '700', color: '#ef4444' }}>
-                        {Math.round(food.calories * portionScale)} <span style={{ fontSize: '11px', fontWeight: 'normal', color: '#64748b' }}>kcal</span>
+                        {Math.round(food.calories * portionScale)} <span style={{ fontSize: '11px', fontWeight: 'normal', color: 'var(--text-muted)' }}>kcal</span>
                       </div>
-                      <div style={{ fontSize: '10px', color: '#94a3b8' }}>
+                      <div style={{ fontSize: '10px', color: 'var(--text-soft)' }}>
                         蛋{food.protein}g / 碳{food.carbs}g / 脂{food.fat}g
                       </div>
                     </div>
@@ -385,14 +385,14 @@ export default function NutritionResult({ result, onSaveToDiary, isSaved }) {
                     {/* 操作按钮：编辑与删除 */}
                     <button
                       onClick={() => handleStartEdit(idx)}
-                      style={{ border: 'none', background: 'none', color: '#94a3b8', cursor: 'pointer', padding: '4px' }}
+                      style={{ border: 'none', background: 'none', color: 'var(--text-soft)', cursor: 'pointer', padding: '4px' }}
                       title="修改分量或热量"
                     >
                       <Edit2 size={15} />
                     </button>
                     <button
                       onClick={() => handleDeleteFood(idx)}
-                      style={{ border: 'none', background: 'none', color: '#cbd5e1', cursor: 'pointer', padding: '4px' }}
+                      style={{ border: 'none', background: 'none', color: 'var(--text-faint)', cursor: 'pointer', padding: '4px' }}
                       title="删除此食材"
                     >
                       <Trash2 size={15} />
@@ -408,17 +408,17 @@ export default function NutritionResult({ result, onSaveToDiary, isSaved }) {
       {/* AI 营养师建议 */}
       {result.healthComment && (
         <div style={{
-          background: '#f8fafc',
+          background: 'var(--bg-main)',
           borderRadius: '16px',
-          border: '1px solid #e2e8f0',
+          border: '1px solid var(--border-color)',
           padding: '14px 16px',
           display: 'flex',
           gap: '10px',
           alignItems: 'flex-start'
         }}>
           <MessageSquare size={18} color="#10b981" style={{ flexShrink: 0, marginTop: '2px' }} />
-          <div style={{ fontSize: '13px', lineHeight: 1.6, color: '#334155' }}>
-            <strong style={{ color: '#0f172a' }}>AI 营养师分析：</strong>
+          <div style={{ fontSize: '13px', lineHeight: 1.6, color: 'var(--text-secondary)' }}>
+            <strong style={{ color: 'var(--text-main)' }}>AI 营养师分析：</strong>
             {result.healthComment}
           </div>
         </div>

@@ -48,14 +48,14 @@ export default function DashboardTab({
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{ fontSize: '12px', fontWeight: '600', color: '#94a3b8', letterSpacing: '0.04em' }}>
+            <span style={{ fontSize: '12px', fontWeight: '600', color: 'var(--text-soft)', letterSpacing: '0.04em' }}>
               TODAY · 饮食总览
             </span>
-            <span style={{ fontSize: '10px', fontWeight: '700', padding: '1px 6px', background: '#ecfdf5', color: '#047857', borderRadius: '6px' }}>
+            <span style={{ fontSize: '10px', fontWeight: '700', padding: '1px 6px', background: 'var(--accent-surface)', color: '#047857', borderRadius: '6px' }}>
               v1.8.2
             </span>
           </div>
-          <h1 style={{ fontSize: '20px', fontWeight: '800', color: '#0f172a', marginTop: '2px' }}>
+          <h1 style={{ fontSize: '20px', fontWeight: '800', color: 'var(--text-main)', marginTop: '2px' }}>
             {todayDateStr}
           </h1>
         </div>
@@ -90,12 +90,12 @@ export default function DashboardTab({
         <div style={{ position: 'relative', zIndex: 2 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <div>
-              <span style={{ fontSize: '13px', color: '#94a3b8', fontWeight: '500' }}>剩余可摄入</span>
+              <span style={{ fontSize: '13px', color: 'var(--text-soft)', fontWeight: '500' }}>剩余可摄入</span>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginTop: '4px' }}>
                 <span style={{ fontSize: '48px', fontWeight: '900', letterSpacing: '-0.04em', lineHeight: 1 }}>
                   {remainingCalories}
                 </span>
-                <span style={{ fontSize: '16px', color: '#94a3b8', fontWeight: '600' }}>kcal</span>
+                <span style={{ fontSize: '16px', color: 'var(--text-soft)', fontWeight: '600' }}>kcal</span>
               </div>
             </div>
 
@@ -114,7 +114,7 @@ export default function DashboardTab({
                 <Flame size={14} color="#f87171" fill="#f87171" />
                 <span>已摄入 {totalCalories}</span>
               </div>
-              <div style={{ fontSize: '11px', color: '#64748b', marginTop: '4px' }}>
+              <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px' }}>
                 目标: {targetCalories} kcal
               </div>
             </div>
@@ -146,7 +146,7 @@ export default function DashboardTab({
                 <span>{proPercent}%</span>
               </div>
               <div style={{ fontSize: '15px', fontWeight: '800', marginTop: '2px' }}>
-                {totalProtein}<span style={{ fontSize: '11px', color: '#94a3b8' }}>/{targetMacros.protein}g</span>
+                {totalProtein}<span style={{ fontSize: '11px', color: 'var(--text-soft)' }}>/{targetMacros.protein}g</span>
               </div>
               <div style={{ height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', marginTop: '6px' }}>
                 <div style={{ width: `${proPercent}%`, height: '100%', background: '#ef4444', borderRadius: '2px' }} />
@@ -160,7 +160,7 @@ export default function DashboardTab({
                 <span>{carbPercent}%</span>
               </div>
               <div style={{ fontSize: '15px', fontWeight: '800', marginTop: '2px' }}>
-                {totalCarbs}<span style={{ fontSize: '11px', color: '#94a3b8' }}>/{targetMacros.carbs}g</span>
+                {totalCarbs}<span style={{ fontSize: '11px', color: 'var(--text-soft)' }}>/{targetMacros.carbs}g</span>
               </div>
               <div style={{ height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', marginTop: '6px' }}>
                 <div style={{ width: `${carbPercent}%`, height: '100%', background: '#3b82f6', borderRadius: '2px' }} />
@@ -174,7 +174,7 @@ export default function DashboardTab({
                 <span>{fatPercent}%</span>
               </div>
               <div style={{ fontSize: '15px', fontWeight: '800', marginTop: '2px' }}>
-                {totalFat}<span style={{ fontSize: '11px', color: '#94a3b8' }}>/{targetMacros.fat}g</span>
+                {totalFat}<span style={{ fontSize: '11px', color: 'var(--text-soft)' }}>/{targetMacros.fat}g</span>
               </div>
               <div style={{ height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', marginTop: '6px' }}>
                 <div style={{ width: `${fatPercent}%`, height: '100%', background: '#f59e0b', borderRadius: '2px' }} />
@@ -187,10 +187,10 @@ export default function DashboardTab({
       {/* 餐次时间轴 (Meal Timeline) */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <h2 style={{ fontSize: '16px', fontWeight: '800', color: '#0f172a' }}>
+          <h2 style={{ fontSize: '16px', fontWeight: '800', color: 'var(--text-main)' }}>
             今日餐食安排
           </h2>
-          <span style={{ fontSize: '12px', color: '#94a3b8' }}>已记录 {todayMeals.length} 次</span>
+          <span style={{ fontSize: '12px', color: 'var(--text-soft)' }}>已记录 {todayMeals.length} 次</span>
         </div>
 
         {mealSections.map((sec) => {
@@ -202,9 +202,9 @@ export default function DashboardTab({
             <div
               key={sec.type}
               style={{
-                background: '#ffffff',
+                background: 'var(--surface)',
                 borderRadius: '20px',
-                border: '1px solid #e2e8f0',
+                border: '1px solid var(--border-color)',
                 padding: '16px',
                 boxShadow: '0 2px 6px rgba(0,0,0,0.02)'
               }}
@@ -226,14 +226,14 @@ export default function DashboardTab({
                   </div>
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <span style={{ fontSize: '15px', fontWeight: '700', color: '#1e293b' }}>{sec.name}</span>
+                      <span style={{ fontSize: '15px', fontWeight: '700', color: 'var(--text-main)' }}>{sec.name}</span>
                       {secCalories > 0 && (
                         <span style={{ fontSize: '13px', fontWeight: '800', color: '#ef4444' }}>
-                          {secCalories} <span style={{ fontSize: '10px', color: '#94a3b8' }}>kcal</span>
+                          {secCalories} <span style={{ fontSize: '10px', color: 'var(--text-soft)' }}>kcal</span>
                         </span>
                       )}
                     </div>
-                    <span style={{ fontSize: '11px', color: '#94a3b8' }}>{sec.desc}</span>
+                    <span style={{ fontSize: '11px', color: 'var(--text-soft)' }}>{sec.desc}</span>
                   </div>
                 </div>
 
@@ -242,8 +242,8 @@ export default function DashboardTab({
                   onClick={() => onOpenLogWithMeal(sec.type)}
                   style={{
                     border: 'none',
-                    background: '#f1f5f9',
-                    color: '#0f172a',
+                    background: 'var(--surface-muted)',
+                    color: 'var(--text-main)',
                     padding: '6px 12px',
                     borderRadius: '10px',
                     fontSize: '12px',
@@ -269,7 +269,7 @@ export default function DashboardTab({
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
-                        background: '#f8fafc',
+                        background: 'var(--bg-main)',
                         padding: '8px 10px',
                         borderRadius: '12px'
                       }}
@@ -283,10 +283,10 @@ export default function DashboardTab({
                           />
                         )}
                         <div>
-                          <div style={{ fontSize: '13px', fontWeight: '600', color: '#1e293b' }}>
+                          <div style={{ fontSize: '13px', fontWeight: '600', color: 'var(--text-main)' }}>
                             {formatMealTitle(meal.dishName, meal.foods)}
                           </div>
-                          <div style={{ fontSize: '11px', color: '#94a3b8' }}>
+                          <div style={{ fontSize: '11px', color: 'var(--text-soft)' }}>
                             {meal.time} · 蛋{meal.totalProtein}g 碳{meal.totalCarbs}g 脂{meal.totalFat}g
                           </div>
                         </div>
@@ -298,7 +298,7 @@ export default function DashboardTab({
                         </span>
                         <button
                           onClick={() => onDeleteMeal(meal.id)}
-                          style={{ border: 'none', background: 'none', color: '#cbd5e1', cursor: 'pointer', padding: '2px' }}
+                          style={{ border: 'none', background: 'none', color: 'var(--text-faint)', cursor: 'pointer', padding: '2px' }}
                         >
                           <Trash2 size={14} />
                         </button>

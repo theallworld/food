@@ -69,7 +69,7 @@ export default function DiaryTab({
           <span style={{ fontSize: '11px', fontWeight: '700', color: '#10b981', letterSpacing: '0.04em' }}>
             DIARY · 饮食时光轴
           </span>
-          <h1 style={{ fontSize: '20px', fontWeight: '800', color: '#0f172a', marginTop: '2px' }}>
+          <h1 style={{ fontSize: '20px', fontWeight: '800', color: 'var(--text-main)', marginTop: '2px' }}>
             饮食日记与照片
           </h1>
         </div>
@@ -86,10 +86,10 @@ export default function DiaryTab({
 
       {/* 日期选择导航条 */}
       <div style={{
-        background: '#ffffff',
+        background: 'var(--surface)',
         borderRadius: '18px',
         padding: '8px 12px',
-        border: '1px solid #e2e8f0',
+        border: '1px solid var(--border-color)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -99,7 +99,7 @@ export default function DiaryTab({
           onClick={handlePrevDay}
           style={{
             border: 'none',
-            background: '#f8fafc',
+            background: 'var(--bg-main)',
             borderRadius: '10px',
             width: '36px',
             height: '36px',
@@ -107,7 +107,7 @@ export default function DiaryTab({
             alignItems: 'center',
             justifyContent: 'center',
             cursor: 'pointer',
-            color: '#475569'
+            color: 'var(--text-secondary)'
           }}
           title="前一天"
         >
@@ -116,7 +116,7 @@ export default function DiaryTab({
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '15px', fontWeight: '800', color: '#0f172a' }}>
+            <div style={{ fontSize: '15px', fontWeight: '800', color: 'var(--text-main)' }}>
               {formatFriendlyDate(selectedDate)}
             </div>
             <input
@@ -127,7 +127,7 @@ export default function DiaryTab({
                 border: 'none',
                 background: 'transparent',
                 fontSize: '11px',
-                color: '#94a3b8',
+                color: 'var(--text-soft)',
                 cursor: 'pointer',
                 outline: 'none',
                 textAlign: 'center'
@@ -140,7 +140,7 @@ export default function DiaryTab({
               onClick={handleGoToday}
               style={{
                 border: 'none',
-                background: '#f0fdf4',
+                background: 'var(--accent-surface)',
                 color: '#10b981',
                 fontSize: '11px',
                 fontWeight: '700',
@@ -158,7 +158,7 @@ export default function DiaryTab({
           onClick={handleNextDay}
           style={{
             border: 'none',
-            background: '#f8fafc',
+            background: 'var(--bg-main)',
             borderRadius: '10px',
             width: '36px',
             height: '36px',
@@ -166,7 +166,7 @@ export default function DiaryTab({
             alignItems: 'center',
             justifyContent: 'center',
             cursor: 'pointer',
-            color: '#475569'
+            color: 'var(--text-secondary)'
           }}
           title="后一天"
         >
@@ -176,24 +176,24 @@ export default function DiaryTab({
 
       {/* 当日小计卡片 */}
       <div style={{
-        background: '#ffffff',
+        background: 'var(--surface)',
         borderRadius: '20px',
         padding: '16px 18px',
-        border: '1px solid #e2e8f0',
+        border: '1px solid var(--border-color)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         boxShadow: '0 2px 4px rgba(0,0,0,0.02)'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div style={{ width: '42px', height: '42px', borderRadius: '12px', background: '#f0fdf4', color: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: '42px', height: '42px', borderRadius: '12px', background: 'var(--accent-surface)', color: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <BookOpen size={20} />
           </div>
           <div>
-            <div style={{ fontSize: '14px', fontWeight: '700', color: '#0f172a' }}>
+            <div style={{ fontSize: '14px', fontWeight: '700', color: 'var(--text-main)' }}>
               共记 {todayMeals.length} 餐
             </div>
-            <div style={{ fontSize: '11px', color: '#94a3b8' }}>
+            <div style={{ fontSize: '11px', color: 'var(--text-soft)' }}>
               蛋 {totalProtein}g · 碳 {totalCarbs}g · 脂 {totalFat}g
             </div>
           </div>
@@ -201,9 +201,9 @@ export default function DiaryTab({
 
         <div style={{ textAlign: 'right' }}>
           <div style={{ fontSize: '18px', fontWeight: '900', color: '#ef4444' }}>
-            {totalCalories} <span style={{ fontSize: '11px', fontWeight: 'normal', color: '#94a3b8' }}>kcal</span>
+            {totalCalories} <span style={{ fontSize: '11px', fontWeight: 'normal', color: 'var(--text-soft)' }}>kcal</span>
           </div>
-          <div style={{ fontSize: '10px', color: '#94a3b8' }}>
+          <div style={{ fontSize: '10px', color: 'var(--text-soft)' }}>
             占目标 {Math.min(100, Math.round((totalCalories / targetCalories) * 100))}%
           </div>
         </div>
@@ -214,20 +214,20 @@ export default function DiaryTab({
         <div style={{
           padding: '60px 20px',
           textAlign: 'center',
-          color: '#94a3b8',
+          color: 'var(--text-soft)',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           gap: '12px',
-          background: '#ffffff',
+          background: 'var(--surface)',
           borderRadius: '22px',
-          border: '1px dashed #cbd5e1'
+          border: '1px dashed var(--border-color)'
         }}>
           <Utensils size={36} color="#cbd5e1" />
-          <div style={{ fontSize: '14px', fontWeight: '700', color: '#64748b' }}>
+          <div style={{ fontSize: '14px', fontWeight: '700', color: 'var(--text-muted)' }}>
             {isToday ? '今天还没有进食记录' : '该日期无进食打卡记录'}
           </div>
-          <div style={{ fontSize: '12px', color: '#94a3b8', maxWidth: '240px' }}>
+          <div style={{ fontSize: '12px', color: 'var(--text-soft)', maxWidth: '240px' }}>
             点击底部绿色的“+”按钮，拍下餐盘即可智能识别保存！
           </div>
         </div>
@@ -237,10 +237,10 @@ export default function DiaryTab({
             <div
               key={meal.id}
               style={{
-                background: '#ffffff',
+                background: 'var(--surface)',
                 borderRadius: '18px',
                 padding: '14px 16px',
-                border: '1px solid #e2e8f0',
+                border: '1px solid var(--border-color)',
                 boxShadow: '0 2px 4px rgba(0,0,0,0.02)',
                 display: 'flex',
                 flexDirection: 'column',
@@ -261,7 +261,7 @@ export default function DiaryTab({
                       overflow: 'hidden',
                       flexShrink: 0,
                       cursor: 'pointer',
-                      border: '1px solid #e2e8f0'
+                      border: '1px solid var(--border-color)'
                     }}
                   >
                     <img
@@ -288,12 +288,12 @@ export default function DiaryTab({
                     width: '64px',
                     height: '64px',
                     borderRadius: '12px',
-                    background: '#f8fafc',
+                    background: 'var(--bg-main)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0,
-                    color: '#cbd5e1',
+                    color: 'var(--text-faint)',
                     border: '1px solid #f1f5f9'
                   }}>
                     <Utensils size={24} />
@@ -305,25 +305,25 @@ export default function DiaryTab({
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
                     <div style={{ flex: '1 1 0%', minWidth: 0 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
-                        <span style={{ fontSize: '11px', fontWeight: '700', padding: '1px 6px', borderRadius: '6px', background: '#f1f5f9', color: '#475569' }}>
+                        <span style={{ fontSize: '11px', fontWeight: '700', padding: '1px 6px', borderRadius: '6px', background: 'var(--surface-muted)', color: 'var(--text-secondary)' }}>
                           {mealTypeLabels[meal.mealType] || '午餐'}
                         </span>
-                        <span style={{ fontSize: '11px', color: '#94a3b8' }}>
+                        <span style={{ fontSize: '11px', color: 'var(--text-soft)' }}>
                           {meal.time}
                         </span>
                       </div>
-                      <div style={{ fontSize: '15px', fontWeight: '800', color: '#0f172a', whiteSpace: 'normal', overflowWrap: 'anywhere', lineHeight: 1.45 }}>
+                      <div style={{ fontSize: '15px', fontWeight: '800', color: 'var(--text-main)', whiteSpace: 'normal', overflowWrap: 'anywhere', lineHeight: 1.45 }}>
                         {formatMealTitle(meal.dishName, meal.foods)}
                       </div>
                     </div>
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
                       <span style={{ fontSize: '16px', fontWeight: '900', color: '#ef4444', whiteSpace: 'nowrap' }}>
-                        +{meal.totalCalories} <span style={{ fontSize: '11px', fontWeight: 'normal', color: '#94a3b8' }}>kcal</span>
+                        +{meal.totalCalories} <span style={{ fontSize: '11px', fontWeight: 'normal', color: 'var(--text-soft)' }}>kcal</span>
                       </span>
                       <button
                         onClick={() => onDeleteMeal(meal.id, selectedDate)}
-                        style={{ border: 'none', background: 'none', color: '#cbd5e1', cursor: 'pointer', padding: '4px' }}
+                        style={{ border: 'none', background: 'none', color: 'var(--text-faint)', cursor: 'pointer', padding: '4px' }}
                         title="删除记录"
                       >
                         <Trash2 size={16} />
@@ -331,7 +331,7 @@ export default function DiaryTab({
                     </div>
                   </div>
 
-                  <div style={{ fontSize: '11px', color: '#64748b', marginTop: '4px' }}>
+                  <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px' }}>
                     蛋 {meal.totalProtein}g · 碳 {meal.totalCarbs}g · 脂 {meal.totalFat}g
                   </div>
                 </div>
@@ -341,7 +341,7 @@ export default function DiaryTab({
               {meal.foods && meal.foods.length > 0 && (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', paddingTop: '8px', borderTop: '1px dashed #f1f5f9' }}>
                   {meal.foods.map((f, i) => (
-                    <span key={i} style={{ fontSize: '11px', background: '#f8fafc', padding: '3px 8px', borderRadius: '6px', color: '#475569', maxWidth: '100%', whiteSpace: 'normal', overflowWrap: 'anywhere' }}>
+                    <span key={i} style={{ fontSize: '11px', background: 'var(--bg-main)', padding: '3px 8px', borderRadius: '6px', color: 'var(--text-secondary)', maxWidth: '100%', whiteSpace: 'normal', overflowWrap: 'anywhere' }}>
                       {f.name} {f.portion && `(${f.portion})`} {f.calories ? `${f.calories}kcal` : ''}
                     </span>
                   ))}

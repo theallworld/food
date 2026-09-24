@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Capacitor, registerPlugin } from '@capacitor/core';
 import {
   Key,
   Target,
@@ -11,8 +10,7 @@ import {
   Scale,
   ChevronDown,
   Check,
-  X,
-  Smartphone
+  X
 } from 'lucide-react';
 import {
   calculateBMI,
@@ -21,7 +19,6 @@ import {
   GOALS
 } from '../../utils/nutritionCalculator';
 
-const FoodWidget = registerPlugin('FoodWidget');
 
 export default function SettingsTab({
   settings,
@@ -52,7 +49,6 @@ export default function SettingsTab({
   const [fat, setFat] = useState(targetMacros.fat || 65);
 
   const [savedSuccess, setSavedSuccess] = useState(false);
-  const [widgetMessage, setWidgetMessage] = useState('');
   const [appliedCalcSuccess, setAppliedCalcSuccess] = useState(false);
   const [activityPickerOpen, setActivityPickerOpen] = useState(false);
 
@@ -108,33 +104,19 @@ export default function SettingsTab({
           <span style={{ fontSize: '11px', fontWeight: '700', color: '#10b981', letterSpacing: '0.04em' }}>
             BODY & TARGETS · 身体档案与热量预算
           </span>
-          <span style={{ fontSize: '11px', fontWeight: '700', color: '#047857', background: '#ecfdf5', padding: '2px 8px', borderRadius: '10px' }}>
-            v1.8.3
+          <span style={{ fontSize: '11px', fontWeight: '700', color: '#047857', background: 'var(--accent-surface)', padding: '2px 8px', borderRadius: '10px' }}>
+            v1.8.4
           </span>
         </div>
-        <h1 style={{ fontSize: '20px', fontWeight: '800', color: '#0f172a', marginTop: '2px' }}>
+        <h1 style={{ fontSize: '20px', fontWeight: '800', color: 'var(--text-main)', marginTop: '2px' }}>
           身体数据与营养目标
         </h1>
       </div>
 
-      {Capacitor.isNativePlatform() && Capacitor.getPlatform() === 'android' && (
-        <section style={{ background: '#ffffff', borderRadius: '18px', padding: '16px', border: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{ width: '42px', height: '42px', borderRadius: '13px', background: '#ecfdf5', color: '#059669', display: 'grid', placeItems: 'center', flexShrink: 0 }}><Smartphone size={21} /></div>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontSize: '14px', color: '#0f172a', fontWeight: 700 }}>桌面今日营养小组件</div>
-            <div style={{ fontSize: '12px', color: '#64748b', marginTop: '3px' }}>{widgetMessage || '把今日热量和营养素放到手机桌面'}</div>
-          </div>
-          <button type="button" onClick={async () => {
-            try { await FoodWidget.pinWidget(); setWidgetMessage('已发送添加请求，请在桌面确认放置'); }
-            catch { setWidgetMessage('长按桌面空白处，在“小组件”列表中添加「今日营养」'); }
-          }} style={{ border: 0, borderRadius: '11px', background: '#0f172a', color: '#fff', fontWeight: 700, fontSize: '12px', padding: '10px 12px', whiteSpace: 'nowrap' }}>添加</button>
-        </section>
-      )}
-
       {/* 1. 身体档案与科学测算卡片 */}
-      <div style={{ background: '#ffffff', borderRadius: '22px', padding: '18px', border: '1px solid #e2e8f0', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+      <div style={{ background: 'var(--surface)', borderRadius: '22px', padding: '18px', border: '1px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '15px', fontWeight: '800', color: '#0f172a' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '15px', fontWeight: '800', color: 'var(--text-main)' }}>
             <Scale size={18} color="#10b981" />
             <span>个人身体档案 (BMR / TDEE 测算)</span>
           </div>
@@ -147,8 +129,8 @@ export default function SettingsTab({
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
           {/* 性别选择 */}
           <div>
-            <label style={{ fontSize: '11px', color: '#64748b', fontWeight: '600', display: 'block', marginBottom: '6px' }}>生理性别</label>
-            <div style={{ display: 'flex', background: '#f1f5f9', padding: '3px', borderRadius: '10px' }}>
+            <label style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: '600', display: 'block', marginBottom: '6px' }}>生理性别</label>
+            <div style={{ display: 'flex', background: 'var(--surface-muted)', padding: '3px', borderRadius: '10px' }}>
               <button
                 type="button"
                 onClick={() => handleProfileChange('gender', 'male')}
@@ -192,35 +174,35 @@ export default function SettingsTab({
 
           {/* 年龄 */}
           <div>
-            <label style={{ fontSize: '11px', color: '#64748b', fontWeight: '600', display: 'block', marginBottom: '6px' }}>年龄 (周岁)</label>
+            <label style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: '600', display: 'block', marginBottom: '6px' }}>年龄 (周岁)</label>
             <input
               type="number"
               value={profile.age}
               onChange={(e) => handleProfileChange('age', e.target.value)}
-              style={{ width: '100%', padding: '8px 10px', borderRadius: '10px', border: '1px solid #cbd5e1', fontSize: '14px', fontWeight: '600', outline: 'none' }}
+              style={{ width: '100%', padding: '8px 10px', borderRadius: '10px', border: '1px solid var(--border-color)', fontSize: '14px', fontWeight: '600', outline: 'none' }}
             />
           </div>
 
           {/* 身高 */}
           <div>
-            <label style={{ fontSize: '11px', color: '#64748b', fontWeight: '600', display: 'block', marginBottom: '6px' }}>身高 (cm)</label>
+            <label style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: '600', display: 'block', marginBottom: '6px' }}>身高 (cm)</label>
             <input
               type="number"
               value={profile.height}
               onChange={(e) => handleProfileChange('height', e.target.value)}
-              style={{ width: '100%', padding: '8px 10px', borderRadius: '10px', border: '1px solid #cbd5e1', fontSize: '14px', fontWeight: '600', outline: 'none' }}
+              style={{ width: '100%', padding: '8px 10px', borderRadius: '10px', border: '1px solid var(--border-color)', fontSize: '14px', fontWeight: '600', outline: 'none' }}
             />
           </div>
 
           {/* 体重 */}
           <div>
-            <label style={{ fontSize: '11px', color: '#64748b', fontWeight: '600', display: 'block', marginBottom: '6px' }}>体重 (kg)</label>
+            <label style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: '600', display: 'block', marginBottom: '6px' }}>体重 (kg)</label>
             <input
               type="number"
               step="0.5"
               value={profile.weight}
               onChange={(e) => handleProfileChange('weight', e.target.value)}
-              style={{ width: '100%', padding: '8px 10px', borderRadius: '10px', border: '1px solid #cbd5e1', fontSize: '14px', fontWeight: '600', outline: 'none' }}
+              style={{ width: '100%', padding: '8px 10px', borderRadius: '10px', border: '1px solid var(--border-color)', fontSize: '14px', fontWeight: '600', outline: 'none' }}
             />
           </div>
         </div>
@@ -228,7 +210,7 @@ export default function SettingsTab({
         {/* 活动量与目标 */}
         <div style={{ marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <div>
-            <label style={{ fontSize: '11px', color: '#64748b', fontWeight: '600', display: 'block', marginBottom: '4px' }}>日常运动活力水平</label>
+            <label style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: '600', display: 'block', marginBottom: '4px' }}>日常运动活力水平</label>
             <button
               type="button"
               onClick={() => setActivityPickerOpen(true)}
@@ -238,9 +220,9 @@ export default function SettingsTab({
                 width: '100%',
                 padding: '9px 12px',
                 borderRadius: '12px',
-                border: '1px solid #e2e8f0',
-                background: '#ffffff',
-                color: '#0f172a',
+                border: '1px solid var(--border-color)',
+                background: 'var(--surface)',
+                color: 'var(--text-main)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
@@ -251,12 +233,12 @@ export default function SettingsTab({
               }}
             >
               <span style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 }}>
-                <span style={{ width: '34px', height: '34px', flexShrink: 0, borderRadius: '10px', background: '#ecfdf5', color: '#059669', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <span style={{ width: '34px', height: '34px', flexShrink: 0, borderRadius: '10px', background: 'var(--accent-surface)', color: '#059669', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <Activity size={17} />
                 </span>
                 <span style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0 }}>
                   <span style={{ fontSize: '13px', fontWeight: '700' }}>{selectedActivity.label}</span>
-                  <span style={{ fontSize: '11px', color: '#94a3b8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{selectedActivity.desc}</span>
+                  <span style={{ fontSize: '11px', color: 'var(--text-soft)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{selectedActivity.desc}</span>
                 </span>
               </span>
               <ChevronDown size={18} color="#64748b" />
@@ -264,7 +246,7 @@ export default function SettingsTab({
           </div>
 
           <div>
-            <label style={{ fontSize: '11px', color: '#64748b', fontWeight: '600', display: 'block', marginBottom: '4px' }}>当前饮食管理目标</label>
+            <label style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: '600', display: 'block', marginBottom: '4px' }}>当前饮食管理目标</label>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
               {GOALS.map(goal => (
                 <button
@@ -291,25 +273,25 @@ export default function SettingsTab({
         </div>
 
         {/* 科学推导结果与一键应用 */}
-        <div style={{ marginTop: '16px', padding: '14px', background: '#f8fafc', borderRadius: '14px', border: '1px dashed #cbd5e1' }}>
+        <div style={{ marginTop: '16px', padding: '14px', background: 'var(--bg-main)', borderRadius: '14px', border: '1px dashed var(--border-color)' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
-            <span style={{ fontSize: '12px', fontWeight: '700', color: '#475569' }}>
+            <span style={{ fontSize: '12px', fontWeight: '700', color: 'var(--text-secondary)' }}>
               📊 科学推算结果 (Mifflin-St Jeor)
             </span>
-            <span style={{ fontSize: '11px', color: '#94a3b8' }}>
+            <span style={{ fontSize: '11px', color: 'var(--text-soft)' }}>
               BMR: {calculatedPlan.bmr} | TDEE: {calculatedPlan.tdee}
             </span>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginBottom: '6px' }}>
-            <span style={{ fontSize: '12px', color: '#64748b' }}>每日推荐摄入：</span>
+            <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>每日推荐摄入：</span>
             <span style={{ fontSize: '22px', fontWeight: '900', color: '#10b981' }}>
               {calculatedPlan.targetCalories}
             </span>
-            <span style={{ fontSize: '12px', color: '#64748b' }}>kcal</span>
+            <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>kcal</span>
           </div>
 
-          <div style={{ fontSize: '12px', color: '#64748b', display: 'flex', gap: '8px', marginBottom: '12px' }}>
+          <div style={{ fontSize: '12px', color: 'var(--text-muted)', display: 'flex', gap: '8px', marginBottom: '12px' }}>
             <span>蛋白 <b style={{ color: '#ef4444' }}>{calculatedPlan.macros.protein}g</b></span>
             <span>·</span>
             <span>碳水 <b style={{ color: '#3b82f6' }}>{calculatedPlan.macros.carbs}g</b></span>
@@ -355,20 +337,20 @@ export default function SettingsTab({
 
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         {/* 2. 当前生效的每日营养目标卡片 */}
-        <div style={{ background: '#ffffff', borderRadius: '20px', padding: '18px', border: '1px solid #e2e8f0', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '14px', fontWeight: '700', color: '#0f172a', marginBottom: '14px' }}>
+        <div style={{ background: 'var(--surface)', borderRadius: '20px', padding: '18px', border: '1px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '14px', fontWeight: '700', color: 'var(--text-main)', marginBottom: '14px' }}>
             <Target size={16} color="#10b981" />
             <span>当前生效的每日营养目标（可微调）</span>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <div>
-              <label style={{ fontSize: '12px', color: '#64748b', display: 'block', marginBottom: '4px' }}>每日总热量预算 (kcal)</label>
+              <label style={{ fontSize: '12px', color: 'var(--text-muted)', display: 'block', marginBottom: '4px' }}>每日总热量预算 (kcal)</label>
               <input
                 type="number"
                 value={targetCalories}
                 onChange={e => setTargetCalories(e.target.value)}
-                style={{ width: '100%', padding: '10px 12px', borderRadius: '12px', border: '1px solid #cbd5e1', fontSize: '15px', fontWeight: '700', outline: 'none' }}
+                style={{ width: '100%', padding: '10px 12px', borderRadius: '12px', border: '1px solid var(--border-color)', fontSize: '15px', fontWeight: '700', outline: 'none' }}
               />
             </div>
 
@@ -379,7 +361,7 @@ export default function SettingsTab({
                   type="number"
                   value={protein}
                   onChange={e => setProtein(e.target.value)}
-                  style={{ width: '100%', padding: '8px', borderRadius: '10px', border: '1px solid #cbd5e1', fontSize: '13px', fontWeight: '600', outline: 'none', marginTop: '4px' }}
+                  style={{ width: '100%', padding: '8px', borderRadius: '10px', border: '1px solid var(--border-color)', fontSize: '13px', fontWeight: '600', outline: 'none', marginTop: '4px' }}
                 />
               </div>
               <div>
@@ -388,7 +370,7 @@ export default function SettingsTab({
                   type="number"
                   value={carbs}
                   onChange={e => setCarbs(e.target.value)}
-                  style={{ width: '100%', padding: '8px', borderRadius: '10px', border: '1px solid #cbd5e1', fontSize: '13px', fontWeight: '600', outline: 'none', marginTop: '4px' }}
+                  style={{ width: '100%', padding: '8px', borderRadius: '10px', border: '1px solid var(--border-color)', fontSize: '13px', fontWeight: '600', outline: 'none', marginTop: '4px' }}
                 />
               </div>
               <div>
@@ -397,7 +379,7 @@ export default function SettingsTab({
                   type="number"
                   value={fat}
                   onChange={e => setFat(e.target.value)}
-                  style={{ width: '100%', padding: '8px', borderRadius: '10px', border: '1px solid #cbd5e1', fontSize: '13px', fontWeight: '600', outline: 'none', marginTop: '4px' }}
+                  style={{ width: '100%', padding: '8px', borderRadius: '10px', border: '1px solid var(--border-color)', fontSize: '13px', fontWeight: '600', outline: 'none', marginTop: '4px' }}
                 />
               </div>
             </div>
@@ -405,41 +387,41 @@ export default function SettingsTab({
         </div>
 
         {/* 3. DeepSeek API 配置 */}
-        <div style={{ background: '#ffffff', borderRadius: '20px', padding: '18px', border: '1px solid #e2e8f0', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '14px', fontWeight: '700', color: '#0f172a', marginBottom: '14px' }}>
+        <div style={{ background: 'var(--surface)', borderRadius: '20px', padding: '18px', border: '1px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '14px', fontWeight: '700', color: 'var(--text-main)', marginBottom: '14px' }}>
             <Key size={16} color="#3b82f6" />
             <span>DeepSeek AI 视觉识别配置</span>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <div>
-              <label style={{ fontSize: '12px', color: '#64748b', display: 'block', marginBottom: '4px' }}>API Key</label>
+              <label style={{ fontSize: '12px', color: 'var(--text-muted)', display: 'block', marginBottom: '4px' }}>API Key</label>
               <input
                 type="password"
                 value={apiKey}
                 onChange={e => setApiKey(e.target.value)}
                 placeholder="sk-..."
-                style={{ width: '100%', padding: '10px 12px', borderRadius: '12px', border: '1px solid #cbd5e1', fontSize: '13px', outline: 'none' }}
+                style={{ width: '100%', padding: '10px 12px', borderRadius: '12px', border: '1px solid var(--border-color)', fontSize: '13px', outline: 'none' }}
               />
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '8px' }}>
               <div>
-                <label style={{ fontSize: '11px', color: '#64748b', display: 'block', marginBottom: '4px' }}>接口地址 (Base URL)</label>
+                <label style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'block', marginBottom: '4px' }}>接口地址 (Base URL)</label>
                 <input
                   type="text"
                   value={baseUrl}
                   onChange={e => setBaseUrl(e.target.value)}
-                  style={{ width: '100%', padding: '8px 10px', borderRadius: '10px', border: '1px solid #cbd5e1', fontSize: '12px', outline: 'none' }}
+                  style={{ width: '100%', padding: '8px 10px', borderRadius: '10px', border: '1px solid var(--border-color)', fontSize: '12px', outline: 'none' }}
                 />
               </div>
               <div>
-                <label style={{ fontSize: '11px', color: '#64748b', display: 'block', marginBottom: '4px' }}>调用模型</label>
+                <label style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'block', marginBottom: '4px' }}>调用模型</label>
                 <input
                   type="text"
                   value={model}
                   onChange={e => setModel(e.target.value)}
-                  style={{ width: '100%', padding: '8px 10px', borderRadius: '10px', border: '1px solid #cbd5e1', fontSize: '12px', outline: 'none' }}
+                  style={{ width: '100%', padding: '8px 10px', borderRadius: '10px', border: '1px solid var(--border-color)', fontSize: '12px', outline: 'none' }}
                 />
               </div>
             </div>
@@ -481,12 +463,12 @@ export default function SettingsTab({
       </form>
 
       {/* 数据安全与关于 */}
-      <div style={{ background: '#f8fafc', borderRadius: '18px', padding: '16px', border: '1px solid #e2e8f0', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '700', color: '#334155' }}>
+      <div style={{ background: 'var(--bg-main)', borderRadius: '18px', padding: '16px', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '700', color: 'var(--text-secondary)' }}>
           <ShieldCheck size={16} color="#10b981" />
           <span>本地优先 Local-First 存储架构</span>
         </div>
-        <p style={{ fontSize: '11px', color: '#64748b', lineHeight: 1.5, margin: 0 }}>
+        <p style={{ fontSize: '11px', color: 'var(--text-muted)', lineHeight: 1.5, margin: 0 }}>
           所有饮食历史照片与数据均通过 IndexedDB 加密保存在您的手机本地沙盒中。历史记录支持按日期无限期永久回溯。
         </p>
       </div>
@@ -519,23 +501,23 @@ export default function SettingsTab({
               maxHeight: '78dvh',
               overflowY: 'auto',
               padding: '10px 16px calc(18px + env(safe-area-inset-bottom, 0px))',
-              background: '#f8fafc',
+              background: 'var(--bg-main)',
               borderRadius: '24px 24px 0 0',
               boxShadow: '0 -12px 36px rgba(15,23,42,0.2)',
               animation: 'slideUp 0.22s ease-out'
             }}
           >
-            <div style={{ width: '36px', height: '4px', borderRadius: '4px', background: '#cbd5e1', margin: '2px auto 14px' }} />
+            <div style={{ width: '36px', height: '4px', borderRadius: '4px', background: 'var(--surface-muted)', margin: '2px auto 14px' }} />
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', marginBottom: '4px' }}>
               <div>
-                <h2 id="activity-picker-title" style={{ margin: 0, color: '#0f172a', fontSize: '17px', fontWeight: '800' }}>选择日常活动水平</h2>
-                <p style={{ margin: '4px 0 0', color: '#64748b', fontSize: '12px' }}>按你一周的平均运动情况选择</p>
+                <h2 id="activity-picker-title" style={{ margin: 0, color: 'var(--text-main)', fontSize: '17px', fontWeight: '800' }}>选择日常活动水平</h2>
+                <p style={{ margin: '4px 0 0', color: 'var(--text-muted)', fontSize: '12px' }}>按你一周的平均运动情况选择</p>
               </div>
               <button
                 type="button"
                 aria-label="关闭活动水平选择"
                 onClick={() => setActivityPickerOpen(false)}
-                style={{ width: '34px', height: '34px', flexShrink: 0, border: 'none', borderRadius: '50%', background: '#e2e8f0', color: '#475569', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+                style={{ width: '34px', height: '34px', flexShrink: 0, border: 'none', borderRadius: '50%', background: 'var(--surface-muted)', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
               >
                 <X size={18} />
               </button>
@@ -573,7 +555,7 @@ export default function SettingsTab({
                     </span>
                     <span style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: '3px' }}>
                       <span style={{ fontSize: '14px', fontWeight: '750', color: isSelected ? '#047857' : '#0f172a' }}>{level.label}</span>
-                      <span style={{ fontSize: '11px', lineHeight: 1.4, color: '#64748b' }}>{level.desc}</span>
+                      <span style={{ fontSize: '11px', lineHeight: 1.4, color: 'var(--text-muted)' }}>{level.desc}</span>
                     </span>
                     <span style={{ width: '22px', height: '22px', flexShrink: 0, borderRadius: '50%', border: isSelected ? 'none' : '1.5px solid #cbd5e1', background: isSelected ? '#10b981' : 'transparent', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       {isSelected && <Check size={14} strokeWidth={2.5} />}

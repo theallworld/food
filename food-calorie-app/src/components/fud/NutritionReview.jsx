@@ -276,7 +276,7 @@ export default function NutritionReview({
 
   return (
     <div style={{
-      background: '#ffffff',
+      background: 'var(--surface)',
       borderRadius: '24px',
       padding: '20px',
       display: 'flex',
@@ -291,13 +291,13 @@ export default function NutritionReview({
           <span style={{ fontSize: '11px', fontWeight: '700', color: '#10b981', letterSpacing: '0.04em' }}>
             NUTRITION REVIEW · 克数与营养核对
           </span>
-          <h2 style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a' }}>
+          <h2 style={{ fontSize: '18px', fontWeight: '800', color: 'var(--text-main)' }}>
             {formatMealTitle(result.dishName, foods)}
           </h2>
         </div>
         <button
           onClick={onCancel}
-          style={{ border: 'none', background: '#f1f5f9', width: '32px', height: '32px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#64748b' }}
+          style={{ border: 'none', background: 'var(--surface-muted)', width: '32px', height: '32px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--text-muted)' }}
         >
           <X size={18} />
         </button>
@@ -337,10 +337,10 @@ export default function NutritionReview({
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
           <div>
-            <div style={{ fontSize: '12px', color: '#94a3b8' }}>这顿饭总摄入</div>
+            <div style={{ fontSize: '12px', color: 'var(--text-soft)' }}>这顿饭总摄入</div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px', marginTop: '2px' }}>
               <span style={{ fontSize: '36px', fontWeight: '900', color: '#ffffff', lineHeight: 1 }}>{totalCalories}</span>
-              <span style={{ fontSize: '14px', color: '#94a3b8' }}>kcal</span>
+              <span style={{ fontSize: '14px', color: 'var(--text-soft)' }}>kcal</span>
             </div>
             {/* 诚实呈现原则：科学置信区间（杜绝伪精度） */}
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', marginTop: '6px', background: 'rgba(16, 185, 129, 0.15)', padding: '2px 8px', borderRadius: '6px', border: '1px solid rgba(16, 185, 129, 0.3)' }}>
@@ -392,7 +392,7 @@ export default function NutritionReview({
         {/* 烹饪用油梯度选择（外卖/中餐最大热量变量调节） */}
         <div style={{ marginTop: '14px', paddingTop: '12px', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-            <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: '600' }}>烹饪用油梯度 (中餐核心变量)</span>
+            <span style={{ fontSize: '11px', color: 'var(--text-soft)', fontWeight: '600' }}>烹饪用油梯度 (中餐核心变量)</span>
             <span style={{ fontSize: '11px', color: '#f59e0b', fontWeight: '700' }}>+{currentOilConfig.oilGrams}g油 ({currentOilConfig.cals} kcal)</span>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '4px' }}>
@@ -426,8 +426,8 @@ export default function NutritionReview({
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
           <div>
-            <span style={{ fontSize: '13px', fontWeight: '800', color: '#0f172a' }}>食材明细</span>
-            <span style={{ fontSize: '11px', color: '#64748b', marginLeft: '6px' }}>可修改克数并点击“更新”重算</span>
+            <span style={{ fontSize: '13px', fontWeight: '800', color: 'var(--text-main)' }}>食材明细</span>
+            <span style={{ fontSize: '11px', color: 'var(--text-muted)', marginLeft: '6px' }}>可修改克数并点击“更新”重算</span>
           </div>
           <button
             onClick={() => setIsAddingNew(true)}
@@ -441,7 +441,7 @@ export default function NutritionReview({
         {/* 添加新食材面板 */}
         {isAddingNew && (
           <div style={{
-            background: '#f8fafc',
+            background: 'var(--bg-main)',
             border: '1.5px dashed #10b981',
             borderRadius: '16px',
             padding: '12px 14px',
@@ -450,25 +450,25 @@ export default function NutritionReview({
             flexDirection: 'column',
             gap: '10px'
           }}>
-            <div style={{ fontSize: '12px', fontWeight: '700', color: '#0f172a', display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <div style={{ fontSize: '12px', fontWeight: '700', color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '4px' }}>
               <PlusCircle size={14} color="#10b981" />
               <span>添加新食材（输入名称与克数，点更新自动重算）</span>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '8px' }}>
               <div>
-                <label style={{ fontSize: '10px', color: '#64748b', display: 'block', marginBottom: '3px' }}>食材名称</label>
+                <label style={{ fontSize: '10px', color: 'var(--text-muted)', display: 'block', marginBottom: '3px' }}>食材名称</label>
                 <input
                   type="text"
                   placeholder="如: 白米饭、水煮蛋"
                   value={newFood.name}
                   onChange={e => setNewFood({ ...newFood, name: e.target.value })}
-                  style={{ width: '100%', padding: '7px 8px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '13px', outline: 'none' }}
+                  style={{ width: '100%', padding: '7px 8px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '13px', outline: 'none' }}
                 />
               </div>
 
               <div>
-                <label style={{ fontSize: '10px', color: '#64748b', display: 'block', marginBottom: '3px' }}>重量 (克)</label>
+                <label style={{ fontSize: '10px', color: 'var(--text-muted)', display: 'block', marginBottom: '3px' }}>重量 (克)</label>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                   <input
                     type="number"
@@ -476,16 +476,16 @@ export default function NutritionReview({
                     placeholder="100"
                     value={newFood.grams}
                     onChange={e => setNewFood({ ...newFood, grams: Math.max(1, Number(e.target.value) || 1) })}
-                    style={{ width: '100%', padding: '7px 8px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '13px', fontWeight: '700', outline: 'none' }}
+                    style={{ width: '100%', padding: '7px 8px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '13px', fontWeight: '700', outline: 'none' }}
                   />
-                  <span style={{ fontSize: '12px', color: '#64748b' }}>g</span>
+                  <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>g</span>
                 </div>
               </div>
             </div>
 
             {/* 核心亮点：按克数计算的【更新】按钮 */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#ffffff', padding: '8px 10px', borderRadius: '10px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontSize: '11px', color: '#475569' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--surface)', padding: '8px 10px', borderRadius: '10px', border: '1px solid var(--border-color)' }}>
+              <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
                 {isCalculatingNew ? (
                   <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#10b981' }}>
                     <Loader2 size={12} className="animate-spin" />
@@ -527,7 +527,7 @@ export default function NutritionReview({
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
               <button
                 onClick={() => setIsAddingNew(false)}
-                style={{ border: 'none', background: '#e2e8f0', color: '#475569', padding: '6px 12px', borderRadius: '8px', fontSize: '12px', cursor: 'pointer' }}
+                style={{ border: 'none', background: 'var(--surface-muted)', color: 'var(--text-secondary)', padding: '6px 12px', borderRadius: '8px', fontSize: '12px', cursor: 'pointer' }}
               >
                 取消
               </button>
@@ -566,23 +566,23 @@ export default function NutritionReview({
                       type="text"
                       value={editForm.name}
                       onChange={e => setEditForm({ ...editForm, name: e.target.value })}
-                      style={{ padding: '6px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '12px' }}
+                      style={{ padding: '6px', borderRadius: '6px', border: '1px solid var(--border-color)', fontSize: '12px' }}
                     />
                     <input
                       type="text"
                       value={editForm.portion}
                       onChange={e => setEditForm({ ...editForm, portion: e.target.value })}
-                      style={{ padding: '6px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '12px' }}
+                      style={{ padding: '6px', borderRadius: '6px', border: '1px solid var(--border-color)', fontSize: '12px' }}
                     />
                     <input
                       type="number"
                       value={editForm.calories}
                       onChange={e => setEditForm({ ...editForm, calories: e.target.value })}
-                      style={{ padding: '6px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '12px' }}
+                      style={{ padding: '6px', borderRadius: '6px', border: '1px solid var(--border-color)', fontSize: '12px' }}
                     />
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '6px' }}>
-                    <button onClick={() => setEditingIndex(null)} style={{ border: 'none', background: '#e2e8f0', padding: '4px 8px', borderRadius: '6px', fontSize: '11px', cursor: 'pointer' }}>取消</button>
+                    <button onClick={() => setEditingIndex(null)} style={{ border: 'none', background: 'var(--surface-muted)', padding: '4px 8px', borderRadius: '6px', fontSize: '11px', cursor: 'pointer' }}>取消</button>
                     <button onClick={() => handleSaveEdit(idx)} style={{ border: 'none', background: '#10b981', color: '#fff', padding: '4px 10px', borderRadius: '6px', fontSize: '11px', fontWeight: '600', cursor: 'pointer' }}>完成</button>
                   </div>
                 </div>
@@ -592,35 +592,35 @@ export default function NutritionReview({
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <span style={{ fontSize: '14px', fontWeight: '800', color: '#0f172a' }}>{food.name}</span>
+                        <span style={{ fontSize: '14px', fontWeight: '800', color: 'var(--text-main)' }}>{food.name}</span>
                         {food.justUpdated && (
-                          <span style={{ fontSize: '10px', fontWeight: '700', color: '#059669', background: '#d1fae5', padding: '1px 6px', borderRadius: '6px' }}>
+                          <span style={{ fontSize: '10px', fontWeight: '700', color: '#059669', background: 'var(--accent-surface)', padding: '1px 6px', borderRadius: '6px' }}>
                             ✓ 已重算
                           </span>
                         )}
                       </div>
-                      <div style={{ fontSize: '11px', color: '#64748b', marginTop: '2px' }}>
+                      <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px' }}>
                         蛋 {food.protein}g · 碳 {food.carbs}g · 脂 {food.fat}g
                       </div>
                     </div>
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <span style={{ fontSize: '15px', fontWeight: '900', color: '#ef4444' }}>
-                        {Math.round(food.calories * portionScale)} <span style={{ fontSize: '10px', color: '#94a3b8' }}>kcal</span>
+                        {Math.round(food.calories * portionScale)} <span style={{ fontSize: '10px', color: 'var(--text-soft)' }}>kcal</span>
                       </span>
                       <button
                         onClick={() => {
                           setEditingIndex(idx);
                           setEditForm({ ...food });
                         }}
-                        style={{ border: 'none', background: 'none', color: '#94a3b8', cursor: 'pointer', padding: '4px' }}
+                        style={{ border: 'none', background: 'none', color: 'var(--text-soft)', cursor: 'pointer', padding: '4px' }}
                         title="自定义编辑"
                       >
                         <Edit2 size={13} />
                       </button>
                       <button
                         onClick={() => handleDelete(idx)}
-                        style={{ border: 'none', background: 'none', color: '#cbd5e1', cursor: 'pointer', padding: '4px' }}
+                        style={{ border: 'none', background: 'none', color: 'var(--text-faint)', cursor: 'pointer', padding: '4px' }}
                         title="删除食材"
                       >
                         <Trash2 size={14} />
@@ -638,7 +638,7 @@ export default function NutritionReview({
                     justifyContent: 'space-between'
                   }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <span style={{ fontSize: '11px', color: '#64748b' }}>分量克数:</span>
+                      <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>分量克数:</span>
 
                       {/* 减 25g */}
                       <button
@@ -646,7 +646,7 @@ export default function NutritionReview({
                         onClick={() => handleStepGrams(idx, -25)}
                         style={{
                           border: 'none',
-                          background: '#f1f5f9',
+                          background: 'var(--surface-muted)',
                           width: '24px',
                           height: '24px',
                           borderRadius: '6px',
@@ -654,7 +654,7 @@ export default function NutritionReview({
                           alignItems: 'center',
                           justifyContent: 'center',
                           cursor: 'pointer',
-                          color: '#475569'
+                          color: 'var(--text-secondary)'
                         }}
                         title="减少25克"
                       >
@@ -662,7 +662,7 @@ export default function NutritionReview({
                       </button>
 
                       {/* 克数直填框 */}
-                      <div style={{ display: 'flex', alignItems: 'center', background: '#f8fafc', border: '1px solid #cbd5e1', borderRadius: '8px', padding: '2px 6px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', background: 'var(--bg-main)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '2px 6px' }}>
                         <input
                           type="number"
                           min="1"
@@ -686,12 +686,12 @@ export default function NutritionReview({
                             background: 'transparent',
                             fontSize: '13px',
                             fontWeight: '700',
-                            color: '#0f172a',
+                            color: 'var(--text-main)',
                             textAlign: 'center',
                             outline: 'none'
                           }}
                         />
-                        <span style={{ fontSize: '11px', color: '#64748b' }}>g</span>
+                        <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>g</span>
                       </div>
 
                       {/* 加 25g */}
@@ -700,7 +700,7 @@ export default function NutritionReview({
                         onClick={() => handleStepGrams(idx, 25)}
                         style={{
                           border: 'none',
-                          background: '#f1f5f9',
+                          background: 'var(--surface-muted)',
                           width: '24px',
                           height: '24px',
                           borderRadius: '6px',
@@ -708,7 +708,7 @@ export default function NutritionReview({
                           alignItems: 'center',
                           justifyContent: 'center',
                           cursor: 'pointer',
-                          color: '#475569'
+                          color: 'var(--text-secondary)'
                         }}
                         title="增加25克"
                       >
@@ -722,7 +722,7 @@ export default function NutritionReview({
                       onClick={() => handleUpdateGrams(idx, food.grams)}
                       style={{
                         border: 'none',
-                        background: '#f0fdf4',
+                        background: 'var(--accent-surface)',
                         color: '#059669',
                         padding: '4px 10px',
                         borderRadius: '8px',
@@ -748,8 +748,8 @@ export default function NutritionReview({
 
       {/* AI 点评 */}
       {result.healthComment && (
-        <div style={{ background: '#f8fafc', padding: '12px', borderRadius: '14px', fontSize: '12px', color: '#475569', lineHeight: 1.5, border: '1px solid #f1f5f9' }}>
-          <strong style={{ color: '#0f172a' }}>💡 营养建议：</strong>{result.healthComment}
+        <div style={{ background: 'var(--bg-main)', padding: '12px', borderRadius: '14px', fontSize: '12px', color: 'var(--text-secondary)', lineHeight: 1.5, border: '1px solid #f1f5f9' }}>
+          <strong style={{ color: 'var(--text-main)' }}>💡 营养建议：</strong>{result.healthComment}
         </div>
       )}
 

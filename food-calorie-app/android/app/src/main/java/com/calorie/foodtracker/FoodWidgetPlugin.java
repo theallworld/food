@@ -1,7 +1,6 @@
 package com.calorie.foodtracker;
 
 import android.appwidget.AppWidgetManager;
-import android.os.Build;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -25,6 +24,9 @@ public class FoodWidgetPlugin extends Plugin {
             .putInt("protein", Math.round((float) data.optDouble("protein", 0)))
             .putInt("carbs", Math.round((float) data.optDouble("carbs", 0)))
             .putInt("fat", Math.round((float) data.optDouble("fat", 0)))
+            .putInt("proteinTarget", data.optInt("proteinTarget", 130))
+            .putInt("carbsTarget", data.optInt("carbsTarget", 220))
+            .putInt("fatTarget", data.optInt("fatTarget", 65))
             .apply();
         AppWidgetManager manager = AppWidgetManager.getInstance(context);
         int[] ids = manager.getAppWidgetIds(new ComponentName(context, FoodWidgetProvider.class));
@@ -32,20 +34,4 @@ public class FoodWidgetPlugin extends Plugin {
         call.resolve();
     }
 
-    @PluginMethod
-    public void pinWidget(PluginCall call) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            call.reject("桌面快捷添加需要 Android 8.0 或更高版本，请通过桌面的小组件列表添加。");
-            return;
-        }
-        AppWidgetManager manager = AppWidgetManager.getInstance(getContext());
-        if (!manager.isRequestPinAppWidgetSupported()) {
-            call.reject("当前桌面启动器不支持快捷添加，请长按桌面并从小组件列表添加。");
-            return;
-        }
-        boolean requested = manager.requestPinAppWidget(
-            new ComponentName(getContext(), FoodWidgetProvider.class), null, null);
-        if (requested) call.resolve();
-        else call.reject("桌面没有接受添加请求，请从桌面小组件列表添加。");
-    }
 }

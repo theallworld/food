@@ -41,7 +41,7 @@ export default function SettingsModal({ isOpen, onClose, settings, onSaveSetting
       zIndex: 50
     }}>
       <div style={{
-        background: '#ffffff',
+        background: 'var(--surface)',
         width: '100%',
         maxWidth: '420px',
         borderRadius: '20px',
@@ -51,12 +51,12 @@ export default function SettingsModal({ isOpen, onClose, settings, onSaveSetting
       }}>
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
-          <h2 style={{ fontSize: '18px', fontWeight: '700', color: '#0f172a' }}>⚙️ 配置 DeepSeek 接口</h2>
+          <h2 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--text-main)' }}>⚙️ 配置 DeepSeek 接口</h2>
           <button
             onClick={onClose}
             style={{
               border: 'none',
-              background: '#f1f5f9',
+              background: 'var(--surface-muted)',
               borderRadius: '50%',
               width: '32px',
               height: '32px',
@@ -64,7 +64,7 @@ export default function SettingsModal({ isOpen, onClose, settings, onSaveSetting
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
-              color: '#64748b'
+              color: 'var(--text-muted)'
             }}
           >
             <X size={18} />
@@ -74,7 +74,7 @@ export default function SettingsModal({ isOpen, onClose, settings, onSaveSetting
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {/* API Key */}
           <div>
-            <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '600', color: '#334155', marginBottom: '6px' }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '6px' }}>
               <Key size={14} color="#10b981" />
               <span>DeepSeek API Key</span>
               <span style={{ color: '#ef4444' }}>*</span>
@@ -89,20 +89,20 @@ export default function SettingsModal({ isOpen, onClose, settings, onSaveSetting
                 width: '100%',
                 padding: '10px 12px',
                 borderRadius: '10px',
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border-color)',
                 fontSize: '14px',
                 outline: 'none',
                 fontFamily: 'monospace'
               }}
             />
-            <p style={{ fontSize: '11px', color: '#64748b', marginTop: '4px' }}>
+            <p style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px' }}>
               密钥仅保存在手机本地设备中，绝不会上传至第三方服务器。
             </p>
           </div>
 
           {/* Model */}
           <div>
-            <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '600', color: '#334155', marginBottom: '6px' }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '6px' }}>
               <Cpu size={14} color="#3b82f6" />
               <span>视觉模型名称</span>
             </label>
@@ -115,19 +115,19 @@ export default function SettingsModal({ isOpen, onClose, settings, onSaveSetting
                 width: '100%',
                 padding: '10px 12px',
                 borderRadius: '10px',
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border-color)',
                 fontSize: '14px',
                 outline: 'none'
               }}
             />
-            <p style={{ fontSize: '11px', color: '#64748b', marginTop: '4px' }}>
+            <p style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px' }}>
               默认使用 DeepSeek 官方视觉模型：<code>deepseek-flash</code>
             </p>
           </div>
 
           {/* Base URL */}
           <div>
-            <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '600', color: '#334155', marginBottom: '6px' }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '6px' }}>
               <Globe size={14} color="#8b5cf6" />
               <span>API 请求接口地址</span>
             </label>
@@ -140,7 +140,7 @@ export default function SettingsModal({ isOpen, onClose, settings, onSaveSetting
                 width: '100%',
                 padding: '10px 12px',
                 borderRadius: '10px',
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border-color)',
                 fontSize: '14px',
                 outline: 'none'
               }}
@@ -149,7 +149,7 @@ export default function SettingsModal({ isOpen, onClose, settings, onSaveSetting
 
           {/* Daily Calorie Target */}
           <div>
-            <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '600', color: '#334155', marginBottom: '6px' }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '6px' }}>
               <Target size={14} color="#f59e0b" />
               <span>每日热量预算目标 (kcal)</span>
             </label>
@@ -163,7 +163,7 @@ export default function SettingsModal({ isOpen, onClose, settings, onSaveSetting
                 width: '100%',
                 padding: '10px 12px',
                 borderRadius: '10px',
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border-color)',
                 fontSize: '14px',
                 outline: 'none'
               }}
