@@ -27,7 +27,13 @@ export default function SettingsTab({
   onSaveSettings,
   onSaveMacros,
   onSaveProfile,
-  onClearHistory
+  onClearHistory,
+  onClearAllData,
+  onOpenPrivacy,
+  onOpenTerms,
+  onRevokePrivacy,
+  theme = 'light',
+  onThemeChange = () => {}
 }) {
   // 身体档案状态
   const [profile, setProfile] = useState({
@@ -43,6 +49,7 @@ export default function SettingsTab({
   const [apiKey, setApiKey] = useState(settings.apiKey || '');
   const [baseUrl, setBaseUrl] = useState(settings.baseUrl || 'https://api.deepseek.com');
   const [model, setModel] = useState(settings.model || 'deepseek-flash');
+  const [aiConsent, setAiConsent] = useState(Boolean(settings.aiConsent));
   const [targetCalories, setTargetCalories] = useState(settings.targetCalories || 2000);
   const [protein, setProtein] = useState(targetMacros.protein || 130);
   const [carbs, setCarbs] = useState(targetMacros.carbs || 220);
@@ -86,7 +93,8 @@ export default function SettingsTab({
       apiKey: apiKey.trim(),
       baseUrl: baseUrl.trim(),
       model: model.trim(),
-      targetCalories: Number(targetCalories) || 2000
+      targetCalories: Number(targetCalories) || 2000,
+      aiConsent
     });
     onSaveMacros({
       protein: Number(protein) || 130,
@@ -98,19 +106,33 @@ export default function SettingsTab({
   };
 
   return (
-    <div style={{ padding: '20px 16px 100px 16px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
+    <div className="screen-enter" style={{ padding: '20px 16px 100px 16px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
       <div>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <span style={{ fontSize: '11px', fontWeight: '700', color: '#10b981', letterSpacing: '0.04em' }}>
             BODY & TARGETS · 身体档案与热量预算
           </span>
           <span style={{ fontSize: '11px', fontWeight: '700', color: '#047857', background: 'var(--accent-surface)', padding: '2px 8px', borderRadius: '10px' }}>
-            v1.8.4
+            v1.8.5
           </span>
         </div>
         <h1 style={{ fontSize: '20px', fontWeight: '800', color: 'var(--text-main)', marginTop: '2px' }}>
           身体数据与营养目标
         </h1>
+        <div className="theme-picker-row">
+          <div>
+            <strong>界面外观</strong>
+            <span>{theme === 'system' ? '跟随系统' : theme === 'dark' ? '夜间 · 黑底白字' : '白日 · 白底黑字'}</span>
+          </div>
+          <div className="theme-control-wrap">
+            <div className="theme-switch theme-switch-three" role="group" aria-label="界面主题">
+              {[['system', '系统'], ['light', '白日'], ['dark', '夜间']].map(([mode, label]) => (
+                <button key={mode} type="button" className={`theme-option${theme === mode ? ' is-selected' : ''}`} aria-pressed={theme === mode} onClick={() => onThemeChange(mode)}>{label}</button>
+              ))}
+            </div>
+            <small className="theme-follow-note">默认跟随手机系统切换，也可手动选择</small>
+          </div>
+        </div>
       </div>
 
       {/* 1. 身体档案与科学测算卡片 */}
@@ -405,26 +427,21 @@ export default function SettingsTab({
               />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '8px' }}>
-              <div>
-                <label style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'block', marginBottom: '4px' }}>接口地址 (Base URL)</label>
-                <input
-                  type="text"
-                  value={baseUrl}
-                  onChange={e => setBaseUrl(e.target.value)}
-                  style={{ width: '100%', padding: '8px 10px', borderRadius: '10px', border: '1px solid var(--border-color)', fontSize: '12px', outline: 'none' }}
-                />
-              </div>
-              <div>
-                <label style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'block', marginBottom: '4px' }}>调用模型</label>
-                <input
-                  type="text"
-                  value={model}
-                  onChange={e => setModel(e.target.value)}
-                  style={{ width: '100%', padding: '8px 10px', borderRadius: '10px', border: '1px solid var(--border-color)', fontSize: '12px', outline: 'none' }}
-                />
-              </div>
+            <div className="api-service-info">
+              <span>官方服务地址</span><code>https://api.deepseek.com</code>
+              <span>默认模型</span><code>deepseek-flash</code>
             </div>
+
+            <label className="ai-consent-row">
+              <input type="checkbox" checked={aiConsent} onChange={event => {
+                const accepted = event.target.checked;
+                setAiConsent(accepted);
+                if (!accepted) localStorage.removeItem('food_ai_data_consent');
+              }} />
+              <span>我同意在主动使用 AI 时，将所需的照片、餐食描述、对话及营养上下文发送至 DeepSeek API 处理。我知道 AI 估算可能有误，且 API 费用按 DeepSeek 账号规则结算。</span>
+            </label>
+            <p className="settings-caption">未勾选或未保存时，AI 识别和 AI 教练不会发送请求；本地饮食记录功能仍可使用。</p>
+            <a className="provider-policy-link" href="https://cdn.deepseek.com/policies/zh-CN/deepseek-privacy-policy.html" target="_blank" rel="noreferrer">查看 DeepSeek 官方隐私政策 ↗</a>
           </div>
         </div>
 
@@ -469,8 +486,14 @@ export default function SettingsTab({
           <span>本地优先 Local-First 存储架构</span>
         </div>
         <p style={{ fontSize: '11px', color: 'var(--text-muted)', lineHeight: 1.5, margin: 0 }}>
-          所有饮食历史照片与数据均通过 IndexedDB 加密保存在您的手机本地沙盒中。历史记录支持按日期无限期永久回溯。
+          饮食记录和照片保存在本机浏览器存储中。Android 版 API Key 使用系统 Android Keystore 加密保存。你可以在下方查看政策或清除本机数据。
         </p>
+        <div className="settings-link-row">
+          <button type="button" className="text-action" onClick={onOpenPrivacy}>隐私政策</button>
+          <button type="button" className="text-action" onClick={onOpenTerms}>用户服务协议</button>
+          <button type="button" className="text-action" onClick={onRevokePrivacy}>撤回隐私同意</button>
+        </div>
+        <button type="button" className="danger-action" onClick={onClearAllData}>清除本机全部数据</button>
       </div>
 
       {activityPickerOpen && (

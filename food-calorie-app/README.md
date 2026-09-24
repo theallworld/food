@@ -2,7 +2,6 @@
 
 > **极简 · 智能 · 科学闭环 · 本地优先** —— 深度融合自然语言实体抽取、权威中餐成分库查表、用油梯度校准与诚实能量区间的饮食与热量管理应用。
 
-[![GitHub release](https://img.shields.io/badge/release-v1.8.4-10b981.svg)](https://github.com/theallworld/food)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Android%20%7C%20iOS%20%7C%20Web-0284c7.svg)](#)
 [![AI Engine](https://img.shields.io/badge/AI%20Engine-DeepSeek--Flash-6366f1.svg)](#)
@@ -16,7 +15,7 @@
 - [3. 现行工程落地方案](#3-现行工程落地方案)
 - [4. 数据源与知识工程](#4-数据源与知识工程)
 - [5. App 核心功能与使用体验](#5-app-核心功能与使用体验)
-- [6. 安装与体验 (v1.8.4)](#6-安装与体验-v184)
+- [6. 应用体验](#6-应用体验)
 - [7. 本地开发与构建](#7-本地开发与构建)
 - [8. 权威参考文献与学术出处](#8-权威参考文献与学术出处)
 
@@ -217,15 +216,13 @@
 
 ---
 
-## 6. 安装与体验 (v1.8.4)
+## 6. 应用体验
 
-当前版本为 **v1.8.4**，桌面名称为「饭时记」，现支持 Android 今日营养桌面小组件，外观跟随系统日夜模式。
+桌面名称为「饭时记」，支持 Android 今日营养桌面小组件，外观跟随系统日夜模式。
 
-项目现已加入 iOS 原生工程，iPhone 版本使用同一套界面、饮食记录和本地数据，最低支持 iOS 15。iOS 首次构建需要 macOS、完整 Xcode 与 CocoaPods；使用 Xcode 打开 `food-calorie-app/ios/App/App.xcworkspace`，选择 `App` scheme 和 iPhone 设备或模拟器后即可构建。安装到真机或发布应用还需要在 Xcode 配置 Apple 开发者签名。相机和照片权限仅在用户使用拍照或选图功能时请求。
+项目包含 iOS 原生工程，iPhone 版本使用同一套界面、饮食记录和本地数据，最低支持 iOS 15。iOS 构建需要 macOS、完整 Xcode 与 CocoaPods；使用 Xcode 打开 `ios/App/App.xcworkspace`，选择 `App` scheme 和 iPhone 设备或模拟器即可在本机运行。相机和照片权限仅在用户主动使用拍照或选图功能时请求。
 
-* 📥 [**`饭时记_v1.8.4.apk`**](../饭时记_v1.8.4.apk)（Android 安装包）
-
-安装 v1.8.4 后，可在手机桌面长按空白处，打开“小组件”列表并添加「今日营养」。
+Android 用户可在手机桌面长按空白处，打开“小组件”列表并添加「今日营养」。
 
 ---
 

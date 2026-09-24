@@ -13,6 +13,28 @@ import org.json.JSONObject;
 @CapacitorPlugin(name = "FoodWidget")
 public class FoodWidgetPlugin extends Plugin {
     @PluginMethod
+    public void setTheme(PluginCall call) {
+        String theme = call.getString("theme", "system");
+        if (!"dark".equals(theme) && !"light".equals(theme)) theme = "system";
+        Context context = getContext();
+        context.getSharedPreferences("food_widget", Context.MODE_PRIVATE).edit().putString("theme", theme).apply();
+        AppWidgetManager manager = AppWidgetManager.getInstance(context);
+        int[] ids = manager.getAppWidgetIds(new ComponentName(context, FoodWidgetProvider.class));
+        FoodWidgetProvider.updateAll(context, manager, ids);
+        call.resolve();
+    }
+
+    @PluginMethod
+    public void clearToday(PluginCall call) {
+        Context context = getContext();
+        context.getSharedPreferences("food_widget", Context.MODE_PRIVATE).edit().clear().apply();
+        AppWidgetManager manager = AppWidgetManager.getInstance(context);
+        int[] ids = manager.getAppWidgetIds(new ComponentName(context, FoodWidgetProvider.class));
+        FoodWidgetProvider.updateAll(context, manager, ids);
+        call.resolve();
+    }
+
+    @PluginMethod
     public void updateToday(PluginCall call) {
         JSONObject data = call.getData();
         Context context = getContext();

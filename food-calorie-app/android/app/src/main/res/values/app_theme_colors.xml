@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="app_status_bar">#F8FAFC</color>
-    <color name="app_navigation_bar">#0F172A</color>
+    <color name="app_navigation_bar">#FFFFFF</color>
     <bool name="app_light_status_bar">true</bool>
 </resources>

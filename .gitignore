@@ -7,6 +7,9 @@
 ehthumbs.db
 Thumbs.db
 AGENTS.md
+agents.md
+**/AGENTS.md
+**/agents.md
 
 # Node dependencies and build
 node_modules/
@@ -30,6 +33,8 @@ yarn-error.log*
 **/android/local.properties
 .idea/
 *.iml
+*.apk
+*.aab
 
 # Environment variables & secrets
 .env
@@ -37,25 +42,3 @@ yarn-error.log*
 *.env
 *.key
 *.pem
-
-# Historical APKs (keep latest v1.8.4 release)
-food-calorie-tracker-v1.1.apk
-food-calorie-tracker-v1.2.apk
-food-calorie-tracker-v1.3.apk
-food-calorie-tracker-v1.4.apk
-food-calorie-tracker-v1.5.apk
-food-calorie-tracker-v1.6.apk
-food-calorie-tracker-v1.7.apk
-食物热量助手_v1.1.apk
-食物热量助手_v1.2.apk
-食物热量助手_v1.3.apk
-食物热量助手_v1.4.apk
-食物热量助手_v1.5.apk
-食物热量助手_v1.6.apk
-食物热量助手_v1.7.apk
-食物热量助手.apk
-饭时记_v1.8.apk
-饭时记_v1.8.1.apk
-
-饭时记_v1.8.2.apk
-饭时记_v1.8.3.apk

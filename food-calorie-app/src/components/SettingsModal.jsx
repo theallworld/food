@@ -1,22 +1,29 @@
-import React, { useState } from 'react';
-import { X, Key, Globe, Cpu, Target, Save, CheckCircle2 } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { X, Key, Target, Save, CheckCircle2, ShieldCheck } from 'lucide-react';
 
 export default function SettingsModal({ isOpen, onClose, settings, onSaveSettings }) {
-  if (!isOpen) return null;
-
   const [apiKey, setApiKey] = useState(settings.apiKey || '');
-  const [baseUrl, setBaseUrl] = useState(settings.baseUrl || 'https://api.deepseek.com');
-  const [model, setModel] = useState(settings.model || 'deepseek-flash');
   const [targetCalories, setTargetCalories] = useState(settings.targetCalories || 2000);
+  const [aiConsent, setAiConsent] = useState(Boolean(settings.aiConsent));
   const [savedSuccess, setSavedSuccess] = useState(false);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    setApiKey(settings.apiKey || '');
+    setTargetCalories(settings.targetCalories || 2000);
+    setAiConsent(Boolean(settings.aiConsent));
+  }, [isOpen, settings]);
+
+  if (!isOpen) return null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onSaveSettings({
       apiKey: apiKey.trim(),
-      baseUrl: baseUrl.trim(),
-      model: model.trim(),
-      targetCalories: Number(targetCalories) || 2000
+      baseUrl: 'https://api.deepseek.com',
+      model: 'deepseek-flash',
+      targetCalories: Number(targetCalories) || 2000,
+      aiConsent
     });
     setSavedSuccess(true);
     setTimeout(() => {
@@ -96,56 +103,18 @@ export default function SettingsModal({ isOpen, onClose, settings, onSaveSetting
               }}
             />
             <p style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px' }}>
-              密钥仅保存在手机本地设备中，绝不会上传至第三方服务器。
+              密钥保存在本机；你主动发起 AI 请求时，会通过 HTTPS 发送给 DeepSeek 用于身份验证。
             </p>
           </div>
 
-          {/* Model */}
-          <div>
-            <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '6px' }}>
-              <Cpu size={14} color="#3b82f6" />
-              <span>视觉模型名称</span>
-            </label>
-            <input
-              type="text"
-              value={model}
-              onChange={(e) => setModel(e.target.value)}
-              placeholder="deepseek-flash"
-              style={{
-                width: '100%',
-                padding: '10px 12px',
-                borderRadius: '10px',
-                border: '1px solid var(--border-color)',
-                fontSize: '14px',
-                outline: 'none'
-              }}
-            />
-            <p style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px' }}>
-              默认使用 DeepSeek 官方视觉模型：<code>deepseek-flash</code>
-            </p>
+          <div style={{ padding: '10px 12px', borderRadius: '10px', background: 'var(--surface-muted)', color: 'var(--text-secondary)', fontSize: '13px' }}>
+            AI 服务：DeepSeek 官方接口 · deepseek-flash
           </div>
 
-          {/* Base URL */}
-          <div>
-            <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '6px' }}>
-              <Globe size={14} color="#8b5cf6" />
-              <span>API 请求接口地址</span>
-            </label>
-            <input
-              type="url"
-              value={baseUrl}
-              onChange={(e) => setBaseUrl(e.target.value)}
-              placeholder="https://api.deepseek.com"
-              style={{
-                width: '100%',
-                padding: '10px 12px',
-                borderRadius: '10px',
-                border: '1px solid var(--border-color)',
-                fontSize: '14px',
-                outline: 'none'
-              }}
-            />
-          </div>
+          <label style={{ display: 'flex', alignItems: 'flex-start', gap: '9px', padding: '12px', border: '1px solid var(--border-color)', borderRadius: '12px', color: 'var(--text-secondary)', fontSize: '12px', lineHeight: 1.6 }}>
+            <input type="checkbox" checked={aiConsent} onChange={(e) => setAiConsent(e.target.checked)} style={{ marginTop: '3px' }} />
+            <span><ShieldCheck size={14} style={{ verticalAlign: 'middle', marginRight: '4px' }} />我同意在主动使用 AI 功能时，将我提交的文字、图片及必要的饮食营养信息发送至 DeepSeek 处理。AI 服务可能产生费用。</span>
+          </label>
 
           {/* Daily Calorie Target */}
           <div>

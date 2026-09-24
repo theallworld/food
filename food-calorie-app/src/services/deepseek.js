@@ -1,5 +1,13 @@
 import { formatMealTitle } from '../utils/nutritionCalculator';
 
+function requireAiConsent() {
+  let accepted = false;
+  try { accepted = localStorage.getItem('food_ai_data_consent') === '1'; } catch { accepted = false; }
+  if (!accepted) {
+    throw new Error('请先前往设置，阅读 AI 数据使用说明并勾选同意后再使用 AI 功能。');
+  }
+}
+
 /**
  * 图像压缩与调整尺寸工具
  */
@@ -51,6 +59,7 @@ export async function analyzeFoodWithDeepSeek({
   baseUrl = 'https://api.deepseek.com',
   model = 'deepseek-flash'
 }) {
+  requireAiConsent();
   if (!apiKey || apiKey.trim() === '') {
     throw new Error('请先在【设置】中配置您的 DeepSeek API Key！');
   }
@@ -64,7 +73,7 @@ export async function analyzeFoodWithDeepSeek({
     ? `\n【用户重点补充提示】：${userNote.trim()}`
     : '';
 
-  const promptText = `你是专业资深的临床注册营养师。请仔细分析这张图片中的所有食物。${notePrompt}
+  const promptText = `你是饮食记录与营养信息辅助工具。请根据图片提供谨慎、清晰的食物识别和估算，不要自称医生、临床营养师或持证专业人员。${notePrompt}
 
 分析准则：
 1. 检查图片是否包含食物或饮料。若完全不包含食物，请输出 isFood: false。
@@ -133,6 +142,7 @@ export async function analyzeFoodTextWithDeepSeek({
   baseUrl = 'https://api.deepseek.com',
   model = 'deepseek-flash'
 }) {
+  requireAiConsent();
   if (!apiKey || apiKey.trim() === '') {
     throw new Error('请先在【设置】中配置您的 DeepSeek API Key！');
   }
@@ -142,7 +152,7 @@ export async function analyzeFoodTextWithDeepSeek({
     ? `${cleanBaseUrl}/chat/completions` 
     : `${cleanBaseUrl}/chat/completions`;
 
-  const promptText = `你是专业资深的临床注册营养师。用户口述了他吃下的餐食内容如下：
+  const promptText = `你是饮食记录与营养信息辅助工具。用户口述了他吃下的餐食内容如下：
 “${textDescription}”
 
 请根据权威中国食物成分表：
@@ -203,6 +213,7 @@ export async function askAICoachWithDeepSeek({
   baseUrl = 'https://api.deepseek.com',
   model = 'deepseek-flash'
 }) {
+  requireAiConsent();
   if (!apiKey || apiKey.trim() === '') {
     throw new Error('请先在【设置】中配置您的 DeepSeek API Key！');
   }
@@ -220,8 +231,8 @@ export async function askAICoachWithDeepSeek({
 - 健身目标：${goalNames[profile.goal] || '健康饮食管理'}
 ` : '';
 
-  const systemPrompt = `你是一位专业、鼓励人且亲切的 AI 私人营养教练（风格对标 Fud-AI Coach）。
-你非常熟悉现代科学减脂、增肌、控糖和地中海/低碳饮食原则。
+  const systemPrompt = `你是一位友善的 AI 饮食记录与营养信息助手。
+你可以提供一般性饮食和营养信息，不是医生、临床营养师或持证专业人员。不要作疾病诊断、治疗承诺或要求用户停止专业医疗建议。
 ${profileInfo}
 【用户今日实时饮食档案】：
 - 目标摄入：${todayContext.targetCalories} kcal

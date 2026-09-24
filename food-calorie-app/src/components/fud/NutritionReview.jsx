@@ -275,19 +275,19 @@ export default function NutritionReview({
   };
 
   return (
-    <div style={{
+    <div className="nutrition-review-content" style={{
       background: 'var(--surface)',
       borderRadius: '24px',
       padding: '20px',
       display: 'flex',
       flexDirection: 'column',
       gap: '16px',
-      maxHeight: '85vh',
-      overflowY: 'auto'
+      maxHeight: 'none',
+      overflowY: 'visible'
     }}>
       {/* 头部与关闭 */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div>
+        <div className="review-heading-copy">
           <span style={{ fontSize: '11px', fontWeight: '700', color: '#10b981', letterSpacing: '0.04em' }}>
             NUTRITION REVIEW · 克数与营养核对
           </span>
@@ -296,6 +296,7 @@ export default function NutritionReview({
           </h2>
         </div>
         <button
+          className="review-close-button"
           onClick={onCancel}
           style={{ border: 'none', background: 'var(--surface-muted)', width: '32px', height: '32px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--text-muted)' }}
         >
@@ -328,7 +329,7 @@ export default function NutritionReview({
       </div>
 
       {/* 核心大卡总览卡片 */}
-      <div style={{
+      <div className="nutrition-summary-card" style={{
         background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
         borderRadius: '20px',
         padding: '18px',
@@ -350,7 +351,7 @@ export default function NutritionReview({
           </div>
 
           {/* 快捷整餐倍率 */}
-          <div style={{ display: 'flex', gap: '4px' }}>
+          <div className="portion-scale-control" style={{ display: 'flex', gap: '4px' }}>
             {[
               { l: '0.5x', s: 0.5 },
               { l: '1.0x', s: 1 },
@@ -360,14 +361,18 @@ export default function NutritionReview({
                 key={item.s}
                 onClick={() => setPortionScale(item.s)}
                 style={{
-                  border: 'none',
-                  padding: '4px 8px',
-                  borderRadius: '8px',
-                  backgroundColor: portionScale === item.s ? '#10b981' : 'rgba(255,255,255,0.1)',
+                  border: portionScale === item.s ? '1px solid rgba(110, 231, 183, 0.72)' : '1px solid rgba(255,255,255,0.08)',
+                  padding: '6px 10px',
+                  borderRadius: '999px',
+                  background: portionScale === item.s ? 'linear-gradient(135deg, #10b981, #059669)' : 'rgba(255,255,255,0.09)',
                   color: '#ffffff',
                   fontSize: '11px',
-                  fontWeight: '600',
-                  cursor: 'pointer'
+                  fontWeight: portionScale === item.s ? '750' : '600',
+                  cursor: 'pointer',
+                  lineHeight: 1.1,
+                  whiteSpace: 'nowrap',
+                  boxShadow: portionScale === item.s ? '0 4px 14px rgba(16,185,129,0.28)' : 'none',
+                  transition: 'background 180ms ease, box-shadow 180ms ease, transform 180ms ease'
                 }}
               >
                 {item.l}

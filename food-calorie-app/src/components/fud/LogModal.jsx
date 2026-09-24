@@ -153,7 +153,7 @@ function OpenLogModal({
   };
 
   return (
-    <div style={{
+    <div className="log-modal-backdrop" style={{
       position: 'fixed',
       top: 0,
       left: 0,
@@ -166,7 +166,7 @@ function OpenLogModal({
       justifyContent: 'center',
       zIndex: 50
     }}>
-      <div style={{
+      <div className={`log-modal-sheet${analysisResult ? ' log-modal-sheet-review' : ''}`} style={{
         background: 'var(--surface)',
         width: '100%',
         maxWidth: '480px',

@@ -221,6 +221,37 @@ export async function clearMealsByDate(dateStr) {
   return true;
 }
 
+/** 清除应用保存的全部饮食记录，兼容 IndexedDB 和旧版 LocalStorage。 */
+export async function clearAllMeals() {
+  const db = await openDB();
+  if (!db && window.indexedDB) throw new Error('无法打开本机饮食记录存储');
+  if (db) {
+    await new Promise((resolve, reject) => {
+      try {
+        const tx = db.transaction([MEALS_STORE], 'readwrite');
+        tx.objectStore(MEALS_STORE).clear();
+        tx.oncomplete = resolve;
+        tx.onerror = () => reject(tx.error || new Error('无法清除本机饮食记录'));
+        tx.onabort = () => reject(tx.error || new Error('清除本机饮食记录已取消'));
+      } catch (error) {
+        reject(error);
+      }
+    });
+    db.close();
+  }
+
+  try {
+    const keys = [];
+    for (let index = 0; index < localStorage.length; index += 1) {
+      const key = localStorage.key(index);
+      if (key?.startsWith('fud_meals_') || key === 'fud_today_meals') keys.push(key);
+    }
+    keys.forEach(key => localStorage.removeItem(key));
+  } catch {
+    // IndexedDB records have already been cleared where available.
+  }
+}
+
 /**
  * 获取所有有记录的历史日期列表 (格式 ['2026-09-23', '2026-09-22', ...])
  */

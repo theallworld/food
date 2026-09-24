@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/widget_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@drawable/food_widget_background">
+    android:background="@drawable/food_widget_background"
+    android:clipToOutline="true">
+    <ViewFlipper
+        android:id="@+id/widget_glow_flipper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:autoStart="true"
+        android:flipInterval="6200"
+        android:animateFirstView="true"
+        android:inAnimation="@anim/widget_glow_in"
+        android:outAnimation="@anim/widget_glow_out">
+        <ImageView android:id="@+id/widget_glow_one" android:layout_width="match_parent" android:layout_height="match_parent" android:scaleType="centerCrop" android:src="@drawable/food_widget_glow_day_one" android:contentDescription="@null" />
+        <ImageView android:id="@+id/widget_glow_two" android:layout_width="match_parent" android:layout_height="match_parent" android:scaleType="centerCrop" android:src="@drawable/food_widget_glow_day_two" android:contentDescription="@null" />
+        <ImageView android:id="@+id/widget_glow_three" android:layout_width="match_parent" android:layout_height="match_parent" android:scaleType="centerCrop" android:src="@drawable/food_widget_glow_day_three" android:contentDescription="@null" />
+    </ViewFlipper>
+    <LinearLayout
+        android:id="@+id/widget_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
         <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="剩余可摄入" android:textColor="@color/widget_text_muted" android:textSize="12sp" />
@@ -20,20 +38,21 @@
     </LinearLayout>
     <ProgressBar android:id="@+id/widget_calories_progress" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="8dp" android:layout_marginTop="10dp" android:progress="0" android:max="100" android:progressTint="@color/widget_accent" android:progressBackgroundTint="@color/widget_track" android:indeterminate="false" />
     <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginTop="14dp">
-        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center_vertical" android:padding="10dp" android:background="@drawable/food_widget_macro_background" android:layout_marginEnd="7dp">
+        <LinearLayout android:id="@+id/widget_protein_card" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center_vertical" android:padding="10dp" android:background="@drawable/food_widget_macro_background" android:layout_marginEnd="7dp">
             <TextView android:id="@+id/widget_protein_label" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="蛋白质 · 0%" android:textColor="@color/widget_protein" android:textSize="11sp" />
             <TextView android:id="@+id/widget_protein" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0/130g" android:textColor="@color/widget_text_primary" android:textSize="16sp" android:textStyle="bold" android:layout_marginTop="5dp" />
             <ProgressBar android:id="@+id/widget_protein_progress" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="5dp" android:layout_marginTop="7dp" android:progress="0" android:max="100" android:progressTint="@color/widget_protein" android:progressBackgroundTint="@color/widget_track" android:indeterminate="false" />
         </LinearLayout>
-        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center_vertical" android:padding="10dp" android:background="@drawable/food_widget_macro_background" android:layout_marginLeft="3dp" android:layout_marginRight="3dp">
+        <LinearLayout android:id="@+id/widget_carbs_card" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center_vertical" android:padding="10dp" android:background="@drawable/food_widget_macro_background" android:layout_marginLeft="3dp" android:layout_marginRight="3dp">
             <TextView android:id="@+id/widget_carbs_label" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="碳水 · 0%" android:textColor="@color/widget_carbs" android:textSize="11sp" />
             <TextView android:id="@+id/widget_carbs" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0/220g" android:textColor="@color/widget_text_primary" android:textSize="16sp" android:textStyle="bold" android:layout_marginTop="5dp" />
             <ProgressBar android:id="@+id/widget_carbs_progress" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="5dp" android:layout_marginTop="7dp" android:progress="0" android:max="100" android:progressTint="@color/widget_carbs" android:progressBackgroundTint="@color/widget_track" android:indeterminate="false" />
         </LinearLayout>
-        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center_vertical" android:padding="10dp" android:background="@drawable/food_widget_macro_background" android:layout_marginStart="7dp">
+        <LinearLayout android:id="@+id/widget_fat_card" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center_vertical" android:padding="10dp" android:background="@drawable/food_widget_macro_background" android:layout_marginStart="7dp">
             <TextView android:id="@+id/widget_fat_label" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="脂肪 · 0%" android:textColor="@color/widget_fat" android:textSize="11sp" />
             <TextView android:id="@+id/widget_fat" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0/65g" android:textColor="@color/widget_text_primary" android:textSize="16sp" android:textStyle="bold" android:layout_marginTop="5dp" />
             <ProgressBar android:id="@+id/widget_fat_progress" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="5dp" android:layout_marginTop="7dp" android:progress="0" android:max="100" android:progressTint="@color/widget_fat" android:progressBackgroundTint="@color/widget_track" android:indeterminate="false" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
+</FrameLayout>

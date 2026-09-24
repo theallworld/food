@@ -43,7 +43,7 @@ export default function DashboardTab({
   };
 
   return (
-    <div style={{ padding: '20px 16px 100px 16px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+    <div className="screen-enter" style={{ padding: '20px 16px 100px 16px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
       {/* 顶部日期与状态 */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div>
@@ -52,7 +52,7 @@ export default function DashboardTab({
               TODAY · 饮食总览
             </span>
             <span style={{ fontSize: '10px', fontWeight: '700', padding: '1px 6px', background: 'var(--accent-surface)', color: '#047857', borderRadius: '6px' }}>
-              v1.8.2
+              v1.8.5
             </span>
           </div>
           <h1 style={{ fontSize: '20px', fontWeight: '800', color: 'var(--text-main)', marginTop: '2px' }}>
@@ -78,7 +78,7 @@ export default function DashboardTab({
       </div>
 
       {/* Fud-AI 风格热量核心卡片 */}
-      <div style={{
+      <div className="dashboard-summary-card" style={{
         background: 'linear-gradient(145deg, #0f172a 0%, #1e293b 100%)',
         borderRadius: '26px',
         padding: '24px 20px',
@@ -101,7 +101,7 @@ export default function DashboardTab({
 
             {/* 环形/百分比角标 */}
             <div style={{ textAlign: 'right' }}>
-              <div style={{
+              <div className="summary-intake-badge" style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '4px',
@@ -121,7 +121,7 @@ export default function DashboardTab({
           </div>
 
           {/* 总热量进度条 */}
-          <div style={{
+          <div className="summary-progress-track" style={{
             height: '8px',
             background: 'rgba(255, 255, 255, 0.1)',
             borderRadius: '4px',
@@ -140,7 +140,7 @@ export default function DashboardTab({
           {/* 三大宏量营养素条 (Fud-AI 标志设计) */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
             {/* 蛋白质 */}
-            <div style={{ background: 'rgba(255, 255, 255, 0.05)', padding: '10px 12px', borderRadius: '16px' }}>
+            <div className="summary-macro-card" style={{ background: 'rgba(255, 255, 255, 0.05)', padding: '10px 12px', borderRadius: '16px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#f87171', fontWeight: '600' }}>
                 <span>蛋白质</span>
                 <span>{proPercent}%</span>
@@ -148,13 +148,13 @@ export default function DashboardTab({
               <div style={{ fontSize: '15px', fontWeight: '800', marginTop: '2px' }}>
                 {totalProtein}<span style={{ fontSize: '11px', color: 'var(--text-soft)' }}>/{targetMacros.protein}g</span>
               </div>
-              <div style={{ height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', marginTop: '6px' }}>
+              <div className="summary-macro-track" style={{ height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', marginTop: '6px' }}>
                 <div style={{ width: `${proPercent}%`, height: '100%', background: '#ef4444', borderRadius: '2px' }} />
               </div>
             </div>
 
             {/* 碳水 */}
-            <div style={{ background: 'rgba(255, 255, 255, 0.05)', padding: '10px 12px', borderRadius: '16px' }}>
+            <div className="summary-macro-card" style={{ background: 'rgba(255, 255, 255, 0.05)', padding: '10px 12px', borderRadius: '16px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#60a5fa', fontWeight: '600' }}>
                 <span>碳水</span>
                 <span>{carbPercent}%</span>
@@ -162,13 +162,13 @@ export default function DashboardTab({
               <div style={{ fontSize: '15px', fontWeight: '800', marginTop: '2px' }}>
                 {totalCarbs}<span style={{ fontSize: '11px', color: 'var(--text-soft)' }}>/{targetMacros.carbs}g</span>
               </div>
-              <div style={{ height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', marginTop: '6px' }}>
+              <div className="summary-macro-track" style={{ height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', marginTop: '6px' }}>
                 <div style={{ width: `${carbPercent}%`, height: '100%', background: '#3b82f6', borderRadius: '2px' }} />
               </div>
             </div>
 
             {/* 脂肪 */}
-            <div style={{ background: 'rgba(255, 255, 255, 0.05)', padding: '10px 12px', borderRadius: '16px' }}>
+            <div className="summary-macro-card" style={{ background: 'rgba(255, 255, 255, 0.05)', padding: '10px 12px', borderRadius: '16px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#fbbf24', fontWeight: '600' }}>
                 <span>脂肪</span>
                 <span>{fatPercent}%</span>
@@ -176,7 +176,7 @@ export default function DashboardTab({
               <div style={{ fontSize: '15px', fontWeight: '800', marginTop: '2px' }}>
                 {totalFat}<span style={{ fontSize: '11px', color: 'var(--text-soft)' }}>/{targetMacros.fat}g</span>
               </div>
-              <div style={{ height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', marginTop: '6px' }}>
+              <div className="summary-macro-track" style={{ height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', marginTop: '6px' }}>
                 <div style={{ width: `${fatPercent}%`, height: '100%', background: '#f59e0b', borderRadius: '2px' }} />
               </div>
             </div>

@@ -7,6 +7,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.widget.RemoteViews;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,6 +23,10 @@ public class FoodWidgetProvider extends AppWidgetProvider {
         SharedPreferences prefs = context.getSharedPreferences("food_widget", Context.MODE_PRIVATE);
         String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         boolean isToday = today.equals(prefs.getString("date", ""));
+        String storedTheme = prefs.getString("theme", "system");
+        boolean darkTheme = "dark".equals(storedTheme) || ("system".equals(storedTheme)
+            && (context.getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK)
+                == android.content.res.Configuration.UI_MODE_NIGHT_YES);
         int calories = isToday ? prefs.getInt("calories", 0) : 0;
         int target = prefs.getInt("targetCalories", 2000);
         int protein = isToday ? prefs.getInt("protein", 0) : 0;
@@ -37,6 +42,27 @@ public class FoodWidgetProvider extends AppWidgetProvider {
         String dateLabel = new SimpleDateFormat("M月d日 EEEE", Locale.CHINA).format(new Date());
         for (int id : ids) {
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.food_widget);
+            int primaryText = Color.parseColor(darkTheme ? "#F8FAFC" : "#111827");
+            int mutedText = Color.parseColor(darkTheme ? "#A8B4C8" : "#526173");
+            int statusText = Color.parseColor(darkTheme ? "#A7F3D0" : "#047857");
+            views.setInt(R.id.widget_root, "setBackgroundResource", darkTheme ? R.drawable.food_widget_background_dark : R.drawable.food_widget_background_light);
+            views.setImageViewResource(R.id.widget_glow_one, darkTheme ? R.drawable.food_widget_glow_dark_one : R.drawable.food_widget_glow_day_one);
+            views.setImageViewResource(R.id.widget_glow_two, darkTheme ? R.drawable.food_widget_glow_dark_two : R.drawable.food_widget_glow_day_two);
+            views.setImageViewResource(R.id.widget_glow_three, darkTheme ? R.drawable.food_widget_glow_dark_three : R.drawable.food_widget_glow_day_three);
+            views.setInt(R.id.widget_protein_card, "setBackgroundResource", darkTheme ? R.drawable.food_widget_macro_background_dark : R.drawable.food_widget_macro_background_light);
+            views.setInt(R.id.widget_carbs_card, "setBackgroundResource", darkTheme ? R.drawable.food_widget_macro_background_dark : R.drawable.food_widget_macro_background_light);
+            views.setInt(R.id.widget_fat_card, "setBackgroundResource", darkTheme ? R.drawable.food_widget_macro_background_dark : R.drawable.food_widget_macro_background_light);
+            views.setInt(R.id.widget_status, "setBackgroundResource", darkTheme ? R.drawable.food_widget_chip_dark : R.drawable.food_widget_chip_light);
+            for (int textId : new int[] { R.id.widget_calories, R.id.widget_protein, R.id.widget_carbs, R.id.widget_fat }) {
+                views.setTextColor(textId, primaryText);
+            }
+            for (int textId : new int[] { R.id.widget_date, R.id.widget_target }) {
+                views.setTextColor(textId, mutedText);
+            }
+            views.setTextColor(R.id.widget_status, statusText);
+            views.setTextColor(R.id.widget_protein_label, Color.parseColor(darkTheme ? "#F87171" : "#C23B45"));
+            views.setTextColor(R.id.widget_carbs_label, Color.parseColor(darkTheme ? "#60A5FA" : "#2769C7"));
+            views.setTextColor(R.id.widget_fat_label, Color.parseColor(darkTheme ? "#FBBF24" : "#956000"));
             views.setTextViewText(R.id.widget_calories, String.valueOf(Math.max(0, target - calories)));
             views.setTextViewText(R.id.widget_target, "目标 " + target + " kcal");
             views.setTextViewText(R.id.widget_date, dateLabel);
@@ -51,6 +77,13 @@ public class FoodWidgetProvider extends AppWidgetProvider {
             views.setProgressBar(R.id.widget_protein_progress, 100, proteinPct, false);
             views.setProgressBar(R.id.widget_carbs_progress, 100, carbsPct, false);
             views.setProgressBar(R.id.widget_fat_progress, 100, fatPct, false);
+            if (android.os.Build.VERSION.SDK_INT >= 31) {
+                android.content.res.ColorStateList track = android.content.res.ColorStateList.valueOf(Color.parseColor(darkTheme ? "#303C56" : "#D8E1E8"));
+                views.setColorStateList(R.id.widget_calories_progress, "setProgressBackgroundTintList", track);
+                views.setColorStateList(R.id.widget_protein_progress, "setProgressBackgroundTintList", track);
+                views.setColorStateList(R.id.widget_carbs_progress, "setProgressBackgroundTintList", track);
+                views.setColorStateList(R.id.widget_fat_progress, "setProgressBackgroundTintList", track);
+            }
             Intent launch = new Intent(context, MainActivity.class);
             launch.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             PendingIntent pending = PendingIntent.getActivity(context, 0, launch, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);

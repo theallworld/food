@@ -62,7 +62,7 @@ export default function DiaryTab({
   };
 
   return (
-    <div style={{ padding: '20px 16px 100px 16px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    <div className="screen-enter" style={{ padding: '20px 16px 100px 16px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
       {/* 顶部标题与清空 */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div>

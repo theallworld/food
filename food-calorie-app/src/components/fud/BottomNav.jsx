@@ -1,16 +1,18 @@
 import React from 'react';
 import { LayoutGrid, BookOpen, Plus, Bot, Sliders } from 'lucide-react';
 
-export default function BottomNav({ activeTab, onTabChange, onOpenLog }) {
+export default function BottomNav({ activeTab, onTabChange, onOpenLog, theme = 'light' }) {
   return (
-    <nav style={{
+    <nav className={`bottom-nav-glass theme-${theme}`} style={{
       position: 'fixed',
       bottom: 0,
       left: 0,
       right: 0,
       width: '100%',
-      background: '#0f172a',
-      borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+      background: 'var(--nav-bg)',
+      backdropFilter: 'blur(18px) saturate(145%)',
+      WebkitBackdropFilter: 'blur(18px) saturate(145%)',
+      borderTop: '1px solid var(--nav-border)',
       display: 'grid',
       gridTemplateColumns: '1fr 1fr auto 1fr 1fr',
       alignItems: 'center',
@@ -18,10 +20,14 @@ export default function BottomNav({ activeTab, onTabChange, onOpenLog }) {
       /* 适配底部全面屏手势横条与虚拟按键，彻底消除底部白边 */
       paddingBottom: 'calc(8px + env(safe-area-inset-bottom, 0px))',
       zIndex: 40,
-      boxShadow: '0 -4px 16px rgba(0, 0, 0, 0.2)'
+      boxShadow: '0 -4px 20px var(--nav-shadow)',
+      color: 'var(--nav-text)',
+      paddingLeft: 'max(4px, env(safe-area-inset-left, 0px))',
+      paddingRight: 'max(4px, env(safe-area-inset-right, 0px))'
     }}>
       {/* 1. 总览 Tab */}
       <button
+        className={`bottom-nav-item${activeTab === 'dashboard' ? ' is-active' : ''}`}
         onClick={() => onTabChange('dashboard')}
         style={{
           border: 'none',
@@ -30,7 +36,7 @@ export default function BottomNav({ activeTab, onTabChange, onOpenLog }) {
           flexDirection: 'column',
           alignItems: 'center',
           gap: '3px',
-          color: activeTab === 'dashboard' ? '#10b981' : '#94a3b8',
+          color: activeTab === 'dashboard' ? 'var(--nav-active)' : 'var(--nav-inactive)',
           cursor: 'pointer',
           padding: '6px 0',
           transition: 'color 0.2s'
@@ -42,6 +48,7 @@ export default function BottomNav({ activeTab, onTabChange, onOpenLog }) {
 
       {/* 2. 饮食日记 Tab */}
       <button
+        className={`bottom-nav-item${activeTab === 'diary' ? ' is-active' : ''}`}
         onClick={() => onTabChange('diary')}
         style={{
           border: 'none',
@@ -50,7 +57,7 @@ export default function BottomNav({ activeTab, onTabChange, onOpenLog }) {
           flexDirection: 'column',
           alignItems: 'center',
           gap: '3px',
-          color: activeTab === 'diary' ? '#10b981' : '#94a3b8',
+          color: activeTab === 'diary' ? 'var(--nav-active)' : 'var(--nav-inactive)',
           cursor: 'pointer',
           padding: '6px 0',
           transition: 'color 0.2s'
@@ -64,6 +71,7 @@ export default function BottomNav({ activeTab, onTabChange, onOpenLog }) {
       <div style={{ padding: '0 8px', display: 'flex', justifyContent: 'center' }}>
         <button
           onClick={onOpenLog}
+          className="nav-add-action"
           style={{
             border: 'none',
             width: '54px',
@@ -87,6 +95,7 @@ export default function BottomNav({ activeTab, onTabChange, onOpenLog }) {
 
       {/* 4. AI 教练 Tab */}
       <button
+        className={`bottom-nav-item${activeTab === 'coach' ? ' is-active' : ''}`}
         onClick={() => onTabChange('coach')}
         style={{
           border: 'none',
@@ -95,7 +104,7 @@ export default function BottomNav({ activeTab, onTabChange, onOpenLog }) {
           flexDirection: 'column',
           alignItems: 'center',
           gap: '3px',
-          color: activeTab === 'coach' ? '#10b981' : '#94a3b8',
+          color: activeTab === 'coach' ? 'var(--nav-active)' : 'var(--nav-inactive)',
           cursor: 'pointer',
           padding: '6px 0',
           transition: 'color 0.2s'
@@ -107,6 +116,7 @@ export default function BottomNav({ activeTab, onTabChange, onOpenLog }) {
 
       {/* 5. 设置 Tab */}
       <button
+        className={`bottom-nav-item${activeTab === 'settings' ? ' is-active' : ''}`}
         onClick={() => onTabChange('settings')}
         style={{
           border: 'none',
@@ -115,7 +125,7 @@ export default function BottomNav({ activeTab, onTabChange, onOpenLog }) {
           flexDirection: 'column',
           alignItems: 'center',
           gap: '3px',
-          color: activeTab === 'settings' ? '#10b981' : '#94a3b8',
+          color: activeTab === 'settings' ? 'var(--nav-active)' : 'var(--nav-inactive)',
           cursor: 'pointer',
           padding: '6px 0',
           transition: 'color 0.2s'

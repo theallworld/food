@@ -87,7 +87,7 @@ export default function CoachTab({
   ];
 
   return (
-    <div style={{ padding: '16px 16px 90px 16px', display: 'flex', flexDirection: 'column', height: '100vh', boxSizing: 'border-box' }}>
+    <div className="screen-enter" style={{ padding: '16px 16px 90px 16px', display: 'flex', flexDirection: 'column', height: '100vh', boxSizing: 'border-box' }}>
       {/* 顶部教练状态与今日饮食缩影 */}
       <div style={{
         background: 'var(--surface)',
