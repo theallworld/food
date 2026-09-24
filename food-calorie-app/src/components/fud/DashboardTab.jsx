@@ -52,7 +52,7 @@ export default function DashboardTab({
               TODAY · 饮食总览
             </span>
             <span style={{ fontSize: '10px', fontWeight: '700', padding: '1px 6px', background: 'var(--accent-surface)', color: '#047857', borderRadius: '6px' }}>
-              v1.8.5
+              v1.8.6
             </span>
           </div>
           <h1 style={{ fontSize: '20px', fontWeight: '800', color: 'var(--text-main)', marginTop: '2px' }}>
